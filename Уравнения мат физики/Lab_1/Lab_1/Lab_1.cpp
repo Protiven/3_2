@@ -319,78 +319,7 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
       // Шаг 3.3
       z++;
 
-      /*
-      for (int i = 0; i < sum_nodes; i++)
-      {
-         *(sup_v + i) = *(X_0 + i);
-         *(X_0 + i) += *(F + i) / *(A + 2 * sum_nodes + i);
-      }
-
-      // область 1
-      for (int i = 0; i < sum_area_1; i++)
-      {
-         if(i - k_1_x >= 0)
-            supp += *(A + i) * *(sup_v + i - k_1_x);
-         if (i - 1 >= 0)
-            supp += *(A + 1 * sum_nodes + i) * *(sup_v + i - 1);
-         
-         supp += *(A + 2 * sum_nodes + i) * *(sup_v + i);
-         supp += *(A + 3 * sum_nodes + i) * *(sup_v + i + 1);
-         supp += *(A + 4 * sum_nodes + i) * *(sup_v + i + k_1_x);
-         
-         supp /= -*(A + 2 * sum_nodes + i);
-
-         *(X_0 + i) += supp;
-         supp = 0;
-      }
-
-      // граница между 1 и 2
-      for (int i = sum_area_1; i < sum_area_1 + k_2_x; i++)
-      {
-         if (i - k_1_x >= 0)
-            supp += *(A + i) * *(sup_v + i - k_1_x);
-         if (i - 1 >= 0)
-            supp += *(A + 1 * sum_nodes + i) * *(sup_v + i - 1);
-
-         supp += *(A + 2 * sum_nodes + i) * *(sup_v + i);
-         supp += *(A + 3 * sum_nodes + i) * *(sup_v + i + 1);
-         supp += *(A + 4 * sum_nodes + i) * *(sup_v + i + k_2_x);
-         supp /= -*(A + 2 * sum_nodes + i);
-
-         *(X_0 + i) += supp;
-         supp = 0;
-      }
-
-      // Область 2 
-      for (int i = sum_area_1 + k_2_x; i < sum_nodes; i++)
-      {
-         supp += *(A + i) * *(sup_v + i - k_2_x);
-         supp += *(A + 1 * sum_nodes + i) * *(sup_v + i - 1);
-         supp += *(A + 2 * sum_nodes + i) * *(sup_v + i);
-         if (i + 1 <= sum_nodes)
-            supp += *(A + 3 * sum_nodes + i) * *(sup_v + i + 1);
-         if (i + k_2_x <= sum_nodes)
-            supp += *(A + 4 * sum_nodes + i) * *(sup_v + i + k_2_x);
-         
-         supp /= -*(A + 2 * sum_nodes + i);
-
-         *(X_0 + i) += supp;
-         supp = 0;
-      }
-
-      // Выход по невязке
-      type* vect;
-      vect = multiply_matr_vect(A, X_0);
-
-      for (int i = 0; i < sum_nodes; i++)
-         *(vect + i) = *(F + i) - *(vect + i);
-
-      if (vector_norm(vect) / vector_norm(F) < epsilon) break;
-
-
-      delete(vect);
-      z++;
-      */
+     
    }
    delete(sup_v);
    return 1;
