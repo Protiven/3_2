@@ -25,12 +25,12 @@ type* res_u;
 
 type resh_U(type x, type y) // считает истинное решение U
 {
-   return pow(x, 2);
+   return x + y;
 }
 
-type m_function(type x, type y)
+type m_function(type x, type y) // правая функция
 {
-   return -2;
+   return x + y;
 }
 
 type lambda(type x, type y) 
@@ -40,12 +40,12 @@ type lambda(type x, type y)
 
 type gamma(type x, type y)
 {
-   return 0;
+   return 1;
 }
 
-type first_boundary_condition(type x, type y)
+type first_boundary_condition(type x, type y) // первое краевое условие
 {
-   return 0;
+   return x + y;
 }
 
 
@@ -274,7 +274,7 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
    type supp = 0, * sup_v, alpha, beta;
    int z = 0;
    int sum_area_1 = k_1_x * k_1_y;
-   double epsilon = 1e-10; 
+   double epsilon = 1e-14; 
 
    type* residual = new type[sum_nodes]{ 0 };
    type* p = new type[sum_nodes]{ 0 };
@@ -288,7 +288,6 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
       *(p + i) = *(residual + i);
    }
   
-
 
    while (z < MAX_ITER)
    {
@@ -307,7 +306,7 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
          residual[i] -= alpha * q[i];
 
       // Шаг 2.5
-      if (vector_norm(residual) <= epsilon) break;
+      if (vector_norm(residual) < epsilon) break;
 
       // Шаг 3.1
       beta = multiply_vect_vect(residual, q) / multiply_vect_vect(p, q);
