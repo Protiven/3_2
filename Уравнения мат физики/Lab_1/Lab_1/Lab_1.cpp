@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-#define MAX_ITER 10000
+#define MAX_ITER 40000
+double epsilon = 1e-15;
 
 using namespace std;
 typedef double type;
@@ -30,22 +31,22 @@ type resh_U(type x, type y) // считает истинное решение U
 
 type m_function(type x, type y) // правая функция
 {
-   return x + y;
+   return 2 * (x + y);
 }
 
 type lambda(type x, type y) 
 {
-   return 1;
+   return 3;
 }
 
 type gamma(type x, type y)
 {
-   return 1;
+   return 2;
 }
 
 type first_boundary_condition(type x, type y) // первое краевое условие
 {
-   return x + y;
+   return resh_U(x, y);
 }
 
 
@@ -100,7 +101,7 @@ int calc_ox_oy(type* X, type* Y) // Все окей
    return 1;
 }
 
-int calc_func(const type* X, const type* Y, type* F) // Пока все окей
+int calc_func(const type* X, const type* Y, type* F) // 
 {
    int i, k,
       supp_x = (x_0_border - x_0) / step_x;
@@ -139,7 +140,7 @@ int calc_func(const type* X, const type* Y, type* F) // Пока все окей
    return 1;
 }
 
-int matrix_filling(type* A, type* F)  // Здесь траблов вроде нет (вроде действительно нет)
+int matrix_filling(type* A, type* F)  // Матрица заполняется правильно, что на счет правой части??
 {
    type* x = new type[N_x + 1]{ 0 };
    type* y = new type[M_y + 1]{ 0 };
@@ -157,7 +158,7 @@ int matrix_filling(type* A, type* F)  // Здесь траблов вроде н
          else
          {
             *(A + j + i * k_1_x) = - lambda(x[j + supp_x], y[i]) / pow(step_y, 2);
-            *(A + sum_nodes + j + i * k_1_x) = -lambda(x[j + supp_x], y[i]) / pow(step_x, 2);
+            *(A + sum_nodes + j + i * k_1_x) = - lambda(x[j + supp_x], y[i]) / pow(step_x, 2);
             *(A + 2 * sum_nodes + j + i * k_1_x) = 2 * lambda(x[j + supp_x], y[i]) * (1. / pow(step_x, 2) + 1. / pow(step_y, 2)) + gamma(x[j + supp_x], y[i]); // диагональ
             *(A + 3 * sum_nodes + j + i * k_1_x) = *(A + sum_nodes + j + i * k_1_x);
             *(A + 4 * sum_nodes + j + i * k_1_x) = *(A + j + i * k_1_x);
@@ -268,13 +269,13 @@ type multiply_vect_vect(type* a, type* b) // 100%
 }
 //
 
-int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 100%
+int calc_SLAE(type* X_0, type* F, type* A) // 
 {
    // Шаг 1.1
    type supp = 0, * sup_v, alpha, beta;
    int z = 0;
    int sum_area_1 = k_1_x * k_1_y;
-   double epsilon = 1e-14; 
+
 
    type* residual = new type[sum_nodes]{ 0 };
    type* p = new type[sum_nodes]{ 0 };
@@ -287,7 +288,7 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
       *(residual + i) = *(F + i) - *(sup_v + i);
       *(p + i) = *(residual + i);
    }
-  
+   delete(sup_v);
 
    while (z < MAX_ITER)
    {
@@ -305,8 +306,11 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
       for (int i = 0; i < sum_nodes; i++)
          residual[i] -= alpha * q[i];
 
-      // Шаг 2.5
-      if (vector_norm(residual) < epsilon) break;
+      // Шаг 2.5 (Выход по невязке)    
+      //if (vector_norm(residual) < epsilon) break; // Чисто по невязке
+ 
+      if (vector_norm(residual) / vector_norm(F) < epsilon) 
+         break; // По относительной невязке
 
       // Шаг 3.1
       beta = multiply_vect_vect(residual, q) / multiply_vect_vect(p, q);
@@ -317,40 +321,70 @@ int calc_SLAE(type* X_0, type* F, type* A) // Решает правильно 10
 
       // Шаг 3.3
       z++;
-
-     
    }
-   delete(sup_v);
+   
    return 1;
 }
 //
 
+
+
+
+
+int calc_SLAE_1(type* X_0, type* F, type* A) // 
+{
+   // Реализация Якоби
+   type* residual = new type[sum_nodes]{ 0 };
+   type* sup;
+
+   int z = 0;
+   while (z < MAX_ITER)
+   {
+      sup = multiply_matr_vect(A, X_0);
+      for (int i = 0; i < sum_nodes; i++) {
+         X_0[i] += F[i] / A[2 * sum_nodes + i];
+         X_0[i] -= sup[i] / A[2 * sum_nodes + i]; // Это надо исправить!!!!
+      }
+
+
+      // Выход по невязке
+      sup = multiply_matr_vect(A, X_0);
+      for (int i = 0; i < sum_nodes; i++)
+         residual[i] = F[i] - sup[i];
+
+      if (vector_norm(residual) / vector_norm(F) < epsilon)
+         break; // По относительной невязке
+
+      z++;
+   }
+   return 1;
+}
+
 int main()
 {
    // Начало этапа "сетка"
-   type* a,* u,* f;
+   type* a, * u, * f, * u_1;
    setlocale(LC_ALL, "rus");
-   if(!read_grid()) return -1;
+   if (!read_grid()) return -1;
 
 
    f = new type[sum_nodes]{ 0 }; // Значение правой части в узлах
    u = new type[sum_nodes]{ 0 }; // значения U(x, y) в узлах
+   u_1 = new type[sum_nodes]{ 0 }; // значения U(x, y) в узлах
    a = new type[sum_nodes * 5]{ 0 }; // матрица A
    res_u = new type[sum_nodes]{ 0 }; // Истинное решение u
 
    if (!matrix_filling(a, f)) return -2;
-   
+
    ///////////////////////// Для проверки
    cout << "Для матрицы " << "\n";
    for (int i = 0; i < sum_nodes; i++)
    {
       cout << "Узел номер " << i + 1 << "\t \t" <<
-         *(a + i) << '\t' <<* (a + i + sum_nodes) << '\t' <<* (a + i + 2*sum_nodes) << '\t'
-         <<* (a + i + 3*sum_nodes) << '\t'<< * (a + i + 4*sum_nodes) << '\n';
+         *(a + i) << '\t' << *(a + i + sum_nodes) << '\t' << *(a + i + 2 * sum_nodes) << '\t'
+         << *(a + i + 3 * sum_nodes) << '\t' << *(a + i + 4 * sum_nodes) << '\n';
    }
-
    cout << "\nДля правой части " << "\n";
-
    for (int i = 0; i < sum_nodes; i++)
    {
       cout << "Узел номер " << i + 1 << "\t \t" << *(f + i) << endl;
@@ -359,12 +393,15 @@ int main()
 
    // Конец этапа "Сетка" (вроде все окей!!!!). Начало решения СЛАУ.
    if (!calc_SLAE(u, f, a)) return -2;
+   if (!calc_SLAE_1(u_1, f, a)) return -2;
+
    delete(f);
    delete(a);
 
    ofstream fout("output.txt");
+   fout << "\t\t\t\tМСГ\t\tЯкоби\t\tИстинное решение\n";
    for (int i = 0; i < sum_nodes; i++)
-      fout << "Узел номер " << i + 1 << '\t' << *(u + i) << '\t' << *(res_u + i) << endl;
+      fout << "Узел " << i + 1 << '\t' << *(u + i) << '\t' << *(u_1 + i) << '\t' << *(res_u + i) << endl;
 
    delete(res_u);
    delete(u);
