@@ -10,22 +10,16 @@
 using namespace std;
 
 GLint Width = 512, Height = 512;
-/*
-GLubyte ColorR = 0, ColorG = 0, ColorB = 0;
-GLubyte PointSize = 5;
-*/
-enum keys { Empty, KeyR, KeyG, KeyB, KeyW, KeyA, KeyS, KeyD, KeyU, KeyI };
-
+enum keys { Empty, KeyR, KeyG, KeyB, KeyW, KeyA, KeyS, KeyD, KeyU, KeyI, KeyL, KeyQ, KeyE, Key0, Key9, Key8, Key7, Key_middle_mouse };
 int i_groups = 0;
 
-/* задание контейнера вершин */
-struct type_point
+struct type_point // задание контейнера вершин
 {
-	GLint x, y, x0, y0;
-	type_point(GLint _x, GLint _y) { x = _x; y = _y; x0 = _x; y0 = _y; }
+	GLint x, y;
+	type_point(GLint _x, GLint _y) { x = _x; y = _y;}
 };
 
-struct group_of_objects
+struct group_of_objects // Создание группы объектов
 {
 	group_of_objects(GLdouble rt, GLubyte R, GLubyte G, GLubyte B, GLubyte Size)
 	{
@@ -36,36 +30,58 @@ struct group_of_objects
 		this->rotation = rt;
 	}
 	vector <type_point> Points;
-	GLdouble rotation;
 	GLubyte ColorR, ColorG, ColorB, PointSize;
+	GLdouble rotation;
 	unsigned int type_of_gr = 0;
 };
-
 vector <group_of_objects> groups;
 
+type_point get_point(const GLdouble rot, const type_point point)
+{
+	type_point new_point(point.x, point.y);
+	if (rot != 0) {
+		new_point.x = point.x * cos(rot) - point.y * sin(rot);
+		new_point.y = point.x * sin(rot) + point.y * cos(rot);
+	}
+	return new_point;
+}
 
-/* Функция вывода на экран */
-void Display(void)
+void prepare_points()
+{
+	type_point* p;
+	for (int i = 0; i < groups[i_groups].Points.size(); i++)
+	{
+		p = &get_point(groups[i_groups].rotation, groups[i_groups].Points[i]);
+		groups[i_groups].Points[i].x = p->x;
+		groups[i_groups].Points[i].y = p->y;
+	}
+	groups[i_groups].rotation = 0;
+}
+
+void Display(void) // Функция вывода на экран
 {
 	glClearColor(0.5, 0.5, 0.5, 1); glClear(GL_COLOR_BUFFER_BIT);
 
 	int size_group = groups.size();
 	for (int k = 0; k < size_group; k++)
 	{
+		type_point* pointer;
 		glColor3ub(groups[k].ColorR, groups[k].ColorG, groups[k].ColorB);
 		glPointSize(groups[k].PointSize);
 		//glMatrixMode();
 		//glLoadIdentity();
 		glBegin(groups[k].type_of_gr);
 		for (int i = 0; i < groups[k].Points.size(); i++)
-			glVertex2i(groups[k].Points[i].x, groups[k].Points[i].y);
+		{
+			pointer = &get_point(groups[k].rotation ,groups[k].Points[i]);
+			glVertex2i(pointer->x, pointer->y); // Надо менять
+		}
 		glEnd();
 	}
 	glFinish();
 }
 
-/* Функция изменения размеров окна */
-void Reshape(GLint w, GLint h)
+void Reshape(GLint w, GLint h) // Функция изменения размеров окна 
 {
 	Width = w;    Height = h;
 	glViewport(0, 0, w, h);
@@ -76,10 +92,8 @@ void Reshape(GLint w, GLint h)
 	glLoadIdentity();
 }
 
-/* Функция обработки сообщений от клавиатуры */
-void Keyboard(unsigned char key, int x, int y)
+void Keyboard(unsigned char key, int x, int y) // Функция обработки сообщений от клавиатуры 
 {
-	bool rot_flag = false;
 	int i, n = groups[i_groups].Points.size();
 
 	/* Изменение примитива */
@@ -103,6 +117,8 @@ void Keyboard(unsigned char key, int x, int y)
 	if (key == 'g') groups[i_groups].ColorG += 5;
 	if (key == 'b') groups[i_groups].ColorB += 5;
 
+	if (key == 'w' || key == 's' || key == 'a' || key == 'd') prepare_points();
+
 	/* Изменение XY-кординат точек */
 	if (key == 'w') for (i = 0; i < n; i++) groups[i_groups].Points[i].y += 5;
 	if (key == 's') for (i = 0; i < n; i++) groups[i_groups].Points[i].y -= 5;
@@ -110,34 +126,15 @@ void Keyboard(unsigned char key, int x, int y)
 	if (key == 'd') for (i = 0; i < n; i++) groups[i_groups].Points[i].x += 5;
 
 	/* Угол*/
-	if (key == 'q')
-	{
-		groups[i_groups].rotation += 0.0436332306;
-		for (i = 0; i < n; i++)
-		{
-			groups[i_groups].Points[i].x = groups[i_groups].Points[i].x0 * cos(groups[i_groups].rotation) - groups[i_groups].Points[i].y0 * sin(groups[i_groups].rotation);
-			groups[i_groups].Points[i].y = groups[i_groups].Points[i].x0 * sin(groups[i_groups].rotation) + groups[i_groups].Points[i].y0 * cos(groups[i_groups].rotation);
-			rot_flag = true;
-		}
-	}
-
-	if (key == 'e')
-	{
-		groups[i_groups].rotation -= 0.0436332306;
-		for (i = 0; i < n; i++)
-		{
-			groups[i_groups].Points[i].x = groups[i_groups].Points[i].x0 * cos(groups[i_groups].rotation) - groups[i_groups].Points[i].y0 * sin(groups[i_groups].rotation);
-			groups[i_groups].Points[i].y = groups[i_groups].Points[i].x0 * sin(groups[i_groups].rotation) + groups[i_groups].Points[i].y0 * cos(groups[i_groups].rotation);
-			rot_flag = true;
-		}
-	}
+	if (key == 'q') groups[i_groups].rotation += 0.0436332306;
+	if (key == 'e') groups[i_groups].rotation -= 0.0436332306;
 
 	/* Изменение размера точек */
 	if (key == 'u') 
 		groups[i_groups].PointSize++;
 	if (key == 'i') 
 		groups[i_groups].PointSize--;
-
+	/* Управление группами */
 	if (key == '0')
 	{
 		if (i_groups < groups.size() - 1)
@@ -156,16 +153,27 @@ void Keyboard(unsigned char key, int x, int y)
 			i_groups--;
 	}
 
+	/* Удаление текущей группы группы */
+	if(key == 'l')
+	{
+		groups[i_groups].Points.clear();
+		groups.erase(groups.begin() + i_groups);
+		if (i_groups - 1 < 0)
+			i_groups = groups.size() - 1;
+		else
+			i_groups--;
+	}
+
 	glutPostRedisplay();
 
-	char v[50]; 
-	//sprintf(v, "Текущий цвет всех точек: R=%.3d G=%.3d B=%.3d", groups[i_groups].ColorR, groups[i_groups].ColorG, groups[i_groups].ColorB);
+	char v[50]; 	
+	int k = groups.size();
+	sprintf(v, "Lab_1 текущая группа %d/%d", i_groups + 1, k);
 	glutSetWindowTitle(v);
 	
 }
 
-/* Функция обработки сообщения от мыши */
-void Mouse(int button, int state, int x, int y)
+void Mouse(int button, int state, int x, int y) // Функция обработки сообщения от мыши 
 {
 	/* клавиша была нажата, но не отпущена */
 	if (state != GLUT_DOWN) return;
@@ -179,7 +187,8 @@ void Mouse(int button, int state, int x, int y)
 	/* удаление последней точки по центральному клику */
 	if (button == GLUT_MIDDLE_BUTTON)
 	{
-		groups[i_groups].Points.pop_back();
+		if (groups[i_groups].Points.size() != 0)
+			groups[i_groups].Points.pop_back();
 	}
 
 	glutPostRedisplay();
@@ -200,6 +209,15 @@ void Menu(int pos)
 	case KeyD: Keyboard('d', 0, 0); break;
 	case KeyU: Keyboard('u', 0, 0); break;
 	case KeyI: Keyboard('i', 0, 0); break;
+	case KeyQ: Keyboard('q', 0, 0); break;
+	case KeyE: Keyboard('e', 0, 0); break;
+
+	case Key7: Keyboard('7', 0, 0); break;
+	case Key8: Keyboard('8', 0, 0); break;
+	case Key9: Keyboard('9', 0, 0); break;
+	case Key0: Keyboard('0', 0, 0); break;
+	case KeyL: Keyboard('l', 0, 0); break;
+	case Key_middle_mouse: Mouse(GLUT_MIDDLE_BUTTON, 0, 0, 0); break;
 
 	default:
 		int menu_color = glutCreateMenu(Menu);
@@ -208,6 +226,9 @@ void Menu(int pos)
 		glutAddMenuEntry("Компонента B", KeyB);
 
 		int menu_move = glutCreateMenu(Menu);
+		glutAddMenuEntry("Вращение против часовой стрелки", KeyQ); 
+		glutAddMenuEntry("Вращение по часовой стрелки", KeyE); 
+		glutAddMenuEntry("Вверх", KeyW);
 		glutAddMenuEntry("Вверх", KeyW);
 		glutAddMenuEntry("Вниз", KeyS);
 		glutAddMenuEntry("Bлево", KeyA);
@@ -217,19 +238,29 @@ void Menu(int pos)
 		glutAddMenuEntry("Увеличить", KeyU);
 		glutAddMenuEntry("Уменьшить", KeyI);
 
+		int menu_group = glutCreateMenu(Menu); 
+		glutAddMenuEntry("Добавить / выбрать следующую группу", Key0); 
+		glutAddMenuEntry("Выбрать предыдущую группу", Key9); 
+		glutAddMenuEntry("Изменить примитив +", Key8); 
+		glutAddMenuEntry("Изменить примитив -", Key7); 
+
+		int menu_del = glutCreateMenu(Menu);  
+		glutAddMenuEntry("Удалить последнюю точку", Key_middle_mouse); 
+		glutAddMenuEntry("Удалить текущую группу", KeyL);
+
 		int menu = glutCreateMenu(Menu);
 		glutAddSubMenu("Смена цвета", menu_color);
 		glutAddSubMenu("Перемещение", menu_move);
 		glutAddSubMenu("Изменение размера точки", menu_size);
+		glutAddSubMenu("Изменение группы", menu_group);
+		glutAddSubMenu("Удаление", menu_del);
 
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
 		Keyboard(Empty, 0, 0);
 	}
 }
 
-
-/* Головная программа */
-void main(int argc, char* argv[])
+void main(int argc, char* argv[]) // Головная программа 
 {
 	groups.push_back(group_of_objects(0, 0, 0, 0, 15));
 	glutInit(&argc, argv);
