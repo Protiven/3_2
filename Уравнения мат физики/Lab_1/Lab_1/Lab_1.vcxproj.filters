@@ -19,4 +19,32 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="even.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="uneven.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="gridx.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="gridy.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="info.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="output.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="gridx_1.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="gridy_1.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

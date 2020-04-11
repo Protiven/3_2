@@ -1,0 +1,5 @@
+﻿  lab_1_for_pasha_vadim.cpp
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim.cpp(59,26): warning C4244: =: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim.cpp(101,14): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim\lab_1_for_pasha_vadim.cpp(147,21): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
+  lab_1_for_pasha_vadim.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\LAB_1\lab_1_for_pasha_vadim\Debug\lab_1_for_pasha_vadim.exe

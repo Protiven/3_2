@@ -1,6 +1,6 @@
 ﻿  Lab_1.cpp
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\Lab_1.cpp(58,51): warning C4244: =: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\Lab_1.cpp(62,26): warning C4244: =: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\Lab_1.cpp(107,14): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\Lab_1.cpp(151,21): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(8,51): warning C4244: =: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(12,26): warning C4244: =: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(31,14): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
+C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(75,21): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
   Lab_1.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Debug\Lab_1.exe
