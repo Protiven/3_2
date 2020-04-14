@@ -1,8 +1,3 @@
-/*
-Отключено консольное (главное) окно:
-	Linker ->  Advanced -> Entery Point := "mainCRTStartup"
-	Linker ->  System -> SubSystem := "Windows (/SUBSYSTEM:WINDOWS)"
-*/
 #include <math.h>
 #include <stdlib.h>
 #include "glut.h"
@@ -162,6 +157,8 @@ void Keyboard(unsigned char key, int x, int y) // Функция обработки сообщений от
 			i_groups = groups.size() - 1;
 		else
 			i_groups--;
+		if (i_groups == -1)
+			i_groups = 0;
 	}
 
 	glutPostRedisplay();

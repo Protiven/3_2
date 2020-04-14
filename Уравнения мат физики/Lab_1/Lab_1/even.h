@@ -1,6 +1,5 @@
 #pragma once
 
-// Тут вроде правильно
 int calc_grid()
 {
    step_x = (x_n - x_0) / N_x;
@@ -16,7 +15,7 @@ int calc_grid()
    return 1;
 }
 
-int calc_ox_oy(type* X, type* Y) // Все окей
+int calc_ox_oy(type* X, type* Y) 
 {
    for (int i = 0; i < N_x + 1; i++)
       *(X + i) = x_0 + step_x * i;

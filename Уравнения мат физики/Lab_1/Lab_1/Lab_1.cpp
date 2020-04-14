@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-#define MAX_ITER 40000
+#define MAX_ITER 70000
 double epsilon = 1e-15;
 
 using namespace std;
@@ -30,17 +30,17 @@ int choice;
 
 type resh_U(type x, type y) // считает истинное решение U
 {
-   return x + y;
+   return pow(x, 1) + pow(y, 1);
 }
 
 type m_function(type x, type y) // правая функция
 {
-   return 2 * (x + y);
+   return 2*(pow(x, 1) + pow(y, 1));
 }
 
 type lambda(type x, type y)
 {
-   return 3;
+   return 1;
 }
 
 type gamma(type x, type y)
@@ -142,9 +142,9 @@ int main()
   
    if (choice == 1)
    {
-      fout << "\t\tЯкоби\t\tИстинное решение\n";
+      fout << "\tU =\tU* =\t|U - U*|\n";
       for (int i = 0; i < sum_nodes; i++)
-         fout << "Узел " << i + 1 << '\t' << *(u_1 + i) << '\t' << *(res_u + i) << endl;
+         fout  << *(u_1 + i) << '\t' << *(res_u + i)<< '\t' << abs(*(res_u + i) - *(u_1 + i)) << endl;
    }
    else 
       out_f(u_1);

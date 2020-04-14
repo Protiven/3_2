@@ -1,11 +1,11 @@
 ﻿  MAIN.cpp
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(52,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(74,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(140,16): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(171,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(47,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(69,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(135,16): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\MAIN.cpp(168,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   Создание кода
-  2 of 157 functions ( 1.3%) were compiled, the rest were copied from previous compilation.
+  0 of 157 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   GLUT.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_1\GLUT_vs15\GLUT\Release\GLUT.exe
