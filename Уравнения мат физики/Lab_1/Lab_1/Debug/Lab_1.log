@@ -1,7 +1,1 @@
-﻿  Lab_1.cpp
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(7,51): warning C4244: =: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(11,26): warning C4244: =: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(30,14): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\even.h(74,21): warning C4244: инициализация: преобразование "type" в "int", возможна потеря данных
-C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Lab_1\uneven.h(83,11): warning C4101: sum_nodes_1: неиспользованная локальная переменная
-  Lab_1.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Debug\Lab_1.exe
+﻿  Lab_1.vcxproj -> C:\Users\Слава\Documents\GitHub\3_2\Уравнения мат физики\Lab_1\Debug\Lab_1.exe
