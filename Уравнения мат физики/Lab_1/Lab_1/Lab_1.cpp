@@ -5,7 +5,7 @@
 #include <fstream>
 
 #define MAX_ITER 70000
-double epsilon = 1e-15;
+double epsilon = 1e-20;
 
 using namespace std;
 typedef double type;
@@ -30,12 +30,12 @@ int choice;
 
 type resh_U(type x, type y) // считает истинное решение U
 {
-   return pow(x, 1) + pow(y, 1);
+   return pow(x, 3);
 }
 
 type m_function(type x, type y) // правая функция
 {
-   return 2*(pow(x, 1) + pow(y, 1));
+   return 2 * (pow(x, 3)) - 6 * x;
 }
 
 type lambda(type x, type y)
