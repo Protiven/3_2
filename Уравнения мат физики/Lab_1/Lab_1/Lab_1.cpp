@@ -30,12 +30,12 @@ int choice;
 
 type resh_U(type x, type y) // считает истинное решение U
 {
-   return pow(x, 3);
+   return pow(x, 5) + pow(y, 5);
 }
 
 type m_function(type x, type y) // правая функция
 {
-   return 2 * (pow(x, 3)) - 6 * x;
+   return 2 * (pow(x, 5) + pow(y, 5)) - 20 * (pow(x, 3) + pow(y, 3));
 }
 
 type lambda(type x, type y)
