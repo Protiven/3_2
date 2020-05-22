@@ -1,0 +1,11 @@
+{
+ "type": "armbot",
+ "token": "387520495876295847569",
+ "name": "arm bot 1",
+ "login": "Demo",
+ "password": "Default",
+ "servers": [
+  "local"
+ ],
+ "uid": "6rr1WVCS85jfQRvF6AG4Cs"
+}

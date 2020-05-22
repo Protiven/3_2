@@ -1,0 +1,27 @@
+.ui.grid{
+  margin-top:0 !important;
+  margin-bottom:0!important;
+}
+.ui.grid>.column:not(.row){
+  padding:0;
+}
+
+.ui.statistic{
+  font-size: 2vh!important;
+  border-bottom:2px solid aqua;
+  width:100%;
+  margin: 0 0 1.5em 0 !important;
+}
+.ui.inverted.teal.statistic>.value, .ui.inverted.teal.statistics .statistic>.value, .ui.statistics .inverted.teal.statistic>.value{
+  font-size: 4vh!important;
+}
+
+@media screen and (max-width:600px){
+  .ui.statistic{
+    font-size: 2vw!important;
+    margin: 0 0 1.5em 1.5vw !important;
+  }
+}
+.ui.inverted.teal.statistic>.value, .ui.inverted.teal.statistics .statistic>.value, .ui.statistics .inverted.teal.statistic>.value{
+  color:#26dafd!important;
+}

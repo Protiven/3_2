@@ -1,0 +1,20 @@
+{
+  "servo1": {
+    "module": "fservo"
+  },
+  "servo2": {
+    "module": "fservo"
+  },
+  "rmd": {
+    "module": "frmd"
+  },
+  "arm": {
+    "module": "farm",
+    "cfg": {
+      "RailLength": 800,
+      "servo1": "servo1",
+      "servo2": "servo2",
+      "rail": "rmd"
+    }
+  }
+}

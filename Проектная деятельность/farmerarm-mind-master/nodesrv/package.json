@@ -1,0 +1,21 @@
+{
+  "name": "farmerarm-mind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botcorejs": "^2.0.7",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "itmp": "^2.0.6",
+    "itmplinkserial": "^2.0.0",
+    "itmplinkserverws": "^2.0.0",
+    "itmplinkws": "^2.0.2",
+    "pigpio": "^3.1.1"
+  }
+}
