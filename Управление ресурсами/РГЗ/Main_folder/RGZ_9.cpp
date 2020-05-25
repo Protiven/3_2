@@ -63,11 +63,11 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
       {
          switch (iRetVal)
          {
-         case -1: // Ошибка загрузки библиотеки
+         case -1: 
             MessageBox(0, L"Failed to load library!\0", 
                L"Error!", MB_ICONERROR);
             break;
-         case -2: // Ошибка загрузки функций из библиотеки
+         case -2: 
             MessageBox(0, L"Failed to load function from library (checking connections)!\0",
                L"Error!", MB_ICONERROR);
             break;
