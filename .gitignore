@@ -1,0 +1,6 @@
+*.tlog
+*.user
+*.filters
+*.obj
+*.idb
+*.pdb
