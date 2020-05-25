@@ -1,0 +1,2 @@
+https://www.scss.tcd.ie/Jeremy.Jones/CS4021/processor-identification-cpuid-instruction-note.pdf
+https://www.amd.com/system/files/TechDocs/25481.pdf
