@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+
 TCHAR info[256];
 
 /* 
@@ -41,6 +42,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
    PAINTSTRUCT ps;
    HDC hDC;
    char c = ' ';
+
 
    switch (msg)
    {
