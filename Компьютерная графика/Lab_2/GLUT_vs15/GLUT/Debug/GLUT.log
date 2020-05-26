@@ -1,0 +1,4 @@
+﻿  MAIN.cpp
+C:\Users\Слава\Downloads\DemoPoints\GLUT_vs15\GLUT\MAIN.cpp(61,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Слава\Downloads\DemoPoints\GLUT_vs15\GLUT\MAIN.cpp(134,16): warning C4018: <: несоответствие типов со знаком и без знака
+  GLUT.vcxproj -> C:\Users\Слава\Downloads\DemoPoints\GLUT_vs15\GLUT\Debug\GLUT.exe
