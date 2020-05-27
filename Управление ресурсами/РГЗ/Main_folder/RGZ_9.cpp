@@ -74,7 +74,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
             MessageBox(0, L"Failed to load function from library (checking connections)!\0",
                L"Error!", MB_ICONERROR);
             break;
-         case -3:
+         case -3: // Ошибка загрузки функций из библиотеки
             MessageBox(0, L"Failed to load function from library (support Hyper-Threading)!\0",
                L"Error!", MB_ICONERROR);
             break;
@@ -97,7 +97,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
       }
 
       c = text_[0];
-      for (int i = 1; c != '\0'; i++)
+      for (int i = 1; c != '\0'; i++) 
       {
          info[i - 1] = c;
          c = text_[i];
