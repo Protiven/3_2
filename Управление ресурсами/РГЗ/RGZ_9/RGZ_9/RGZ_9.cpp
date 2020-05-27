@@ -46,6 +46,33 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
    HDC hDC;
    char c = ' ';
 
+//////////////////////////////////
+   unsigned int sup_value, sup_value_2, sup_value_3;
+
+
+   char vendor[12];
+   int sup_value_4;
+
+   // Узнаем производителя процессора
+   __asm
+   {
+      mov eax, 0
+      cpuid
+      MOV sup_value_4, ECX
+      MOV sup_value_2, EDX
+      mov sup_value, ebx
+      mov eax, 1
+      cpuid
+      shr edx, 28
+      mov sup_value_3, edx;
+   }
+   ((unsigned*)vendor)[0] = sup_value;
+   ((unsigned*)vendor)[1] = sup_value_2;
+   ((unsigned*)vendor)[2] = sup_value_4;
+
+
+   std::string cpuVendor = std::string(vendor, 12);
+   /////////////////////
 
    switch (msg)
    {
@@ -56,16 +83,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       //////////////////////////////////////////////////// Проверка Hyper-Threading
 
-      int sup_value, sup_value_2, sup_value_3;
-      // Узнаем производителя процессора
-      __asm
-      {
-         mov eax, 0
-         cpuid
-         mov sup_value, ebx
-      }
-
-      if (sup_value == 0x756E6547) // Сравнение с индентификатором EBX (Intel)
+      if (cpuVendor == "GenuineIntel" && (sup_value_3 & 1)) // Сравнение с индентификатором EBX (Intel)
       {
          __asm
          {
@@ -73,10 +91,10 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
             cpuid
             mov sup_value, ebx; // >> 16 & 0x0FF Отвечает за лог ядра
             mov sup_value_2, eax; // >> 26 & 0x3f + 1 Отвечает за ядра
-            mov sup_value_3, edx;
+
          }
          if (((sup_value >> 16) & 0x0FF) / (((sup_value_2 >> 26) & 0x3f) + 1))
-            sup_value_3 &= 1 << 28;
+            sup_value_3 &= 1 << 28; // здесь уже тру
       }
       //Если выполнить cpuid с EAX=0, то:
       //EAX - максимальное значение, с которым можно выполнять cpuid
