@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+
 TCHAR info[256];
 
 /* 
@@ -18,16 +19,18 @@ DWORD WINAPI get_info(void*)
    
    TCHAR info_[2];
 
-   if ((h_Lib = LoadLibrary(TEXT("Dll.dll"))) == NULL)
+   if ((h_Lib = LoadLibrary(TEXT("Dll.dll"))) == NULL) // Загружаем библиотеку
       return -1;
-   
-   if (!(check_network = (ImportFunction)GetProcAddress(h_Lib, "check_network")))
+    
+   // Загружаем функцию из библиотеки, и в случае успеха используем её
+   if (!(check_network = (ImportFunction)GetProcAddress(h_Lib, "check_network"))) 
       return -2;
    else check_network(info_);
 
    info[0] = info_[0];
 
-   if (!(check_availability_HyperThreading = (ImportFunction)GetProcAddress(h_Lib, "check_availability_HyperThreading")))
+   // Загружаем функцию из библиотеки, и в случае успеха используем её
+   if (!(check_availability_HyperThreading = (ImportFunction)GetProcAddress(h_Lib, "check_availability_HyperThreading"))) // Загружаем функцию из библиотеки
       return -3;
    else check_availability_HyperThreading(info_);
    info[1] = info_[1];
@@ -42,6 +45,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
    HDC hDC;
    char c = ' ';
 
+
    switch (msg)
    {
    case WM_CREATE:
@@ -49,25 +53,50 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
       char text_sup[30];
       char text_sup_2[30];
       
+      //////////////////////////////////////////////////// Проверка Hyper-Threading
+   
+      char info_proc[250];
+
+      __asm
+      {
+         mov eax, 0
+         cpuid
+         mov info_proc, ebx;
+      }
+
+      //Если выполнить cpuid с EAX=0, то:
+      //EAX - максимальное значение, с которым можно выполнять cpuid
+      //EBX:EDX:ECX - строка - 12-байтный идентификатор производителя
+
+
+
+
+
+
+
+
+
+
+      ////////////////////////////////////////////////////
 
       HANDLE hThread;
       DWORD IDThread;
-      hThread = CreateThread(NULL, 0, get_info, NULL, 0, &IDThread);
+      hThread = CreateThread(NULL, 0, get_info, NULL, 0, &IDThread); // Создаем дочерний поток
 
       DWORD iRetVal;
       WaitForSingleObject(hThread, INFINITE);
-      GetExitCodeThread(hThread, &iRetVal);
+      GetExitCodeThread(hThread, &iRetVal); // Получаем код ошибки в iRetVal
       CloseHandle(hThread);
       
-      if (iRetVal != 1)
+      if (iRetVal != 1) // В случае если выход из процесса вернул код ошибки, обрабатываем ошибки
       {
          switch (iRetVal)
          {
-         case -1: 
+         case -1: // Ошибка загрузки библиотеки
             MessageBox(0, L"Failed to load library!\0", 
                L"Error!", MB_ICONERROR);
             break;
-         case -2: 
+         case -2: // Ошибка загрузки функций из библиотеки
             MessageBox(0, L"Failed to load function from library (checking connections)!\0",
                L"Error!", MB_ICONERROR);
             break;
@@ -78,7 +107,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
          }
          return -1;
       }
-      else
+      else // В случае если все произошло успешно, обрабатываем и выдаем результат
       {
          if (info[0] == 1)
             strcpy(text_sup, "exist");
@@ -113,7 +142,6 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
    }
    return 0;
 }
-
 
 int WINAPI WinMain(HINSTANCE hThisInst, HINSTANCE, LPSTR, int nCmdShow)
 {

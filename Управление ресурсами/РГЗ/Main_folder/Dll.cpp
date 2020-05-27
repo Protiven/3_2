@@ -7,11 +7,12 @@ extern "C" _declspec(dllexport) void  check_network(TCHAR* val)
 	int value = GetSystemMetrics(SM_NETWORK);
 	__asm 
 	{
-      mov eax, value
-      and eax, 1
-      mov value, eax
+      mov eax, value; // value копируем в EAX
+      and eax, 1; // берем первый бит из EAX
+      mov value, eax; // результат возвращаем в value
 	}
 
+   // Возвращение результата
 	if (value == 1) val[0] = 1;
 	else  val[0] = 0;
 }
@@ -29,6 +30,7 @@ extern "C" __declspec(dllexport) void check_availability_HyperThreading(TCHAR* v
       mov value, edx
    }
    
+   // Возвращение результата
    if (value == 1) val[1] = 1;
    else val[1] = 0;
 }
