@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <iostream>
 #include <string.h>
-#include <intrin.h>
 
 //If the network is exist, then function return 1 in first position. Else return 0.
 extern "C" _declspec(dllexport) void  check_network(TCHAR* val) 
