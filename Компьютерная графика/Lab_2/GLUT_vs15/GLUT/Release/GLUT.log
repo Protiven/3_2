@@ -1,13 +1,27 @@
 ﻿  MAIN.cpp
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(116,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(154,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(471,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(545,16): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(600,16): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(633,18): warning C4018: >=: несоответствие типов со знаком и без знака
-  Создание кода
-  1 of 384 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Создание кода завершено
-  GLUT.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Release\GLUT.exe
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(14,3): error C2065: shift: необъявленный идентификатор
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(15,3): error C2065: shift: необъявленный идентификатор
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(16,3): error C2065: shift: необъявленный идентификатор
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(176,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(179,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(274,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(286,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(287,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(288,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(294,28): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(298,28): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(299,35): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(317,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(318,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(319,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(332,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(333,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\library.h(341,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(439,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(441,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(445,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(455,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(482,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(497,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(512,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(513,21): warning C4018: <: несоответствие типов со знаком и без знака
