@@ -419,7 +419,7 @@ int Width = 800, Height = 800;
 using namespace std;
 
 object figure;
-point_3d spectator(0, 0, 2); // x - расстояние от объекта
+//point_3d spectator(0, 0, 0.1); // x - расстояние от объекта
 
 bool buff_depth = 0;
 bool double_buff = 1;
@@ -440,12 +440,20 @@ bool ortho_or_perspective = 0; // 0 - ортографич, 1 - перспективная
 float perspective_angle = 30;
 float perspective_ratio = 1;
 
-
-
 bool smooth_normal = 0; 
 #define Max_size 50
 int matrix_smezhnost[Max_size][Max_size];
 
+typedef struct system_sphere {
+	type_coordinates Radius, Alpha, Theta;
+
+	system_sphere(type_coordinates rad, type_coordinates alph, type_coordinates beth) {
+		this->Radius = rad;
+		this->Alpha = alph;
+		this->Theta = beth;
+	}
+}Sphere_syst;
+Sphere_syst SystemCoordinate(0, 0, 1);
 
 void clear_matrix(){
 	for (int i = 0; i < Max_size; i++)
@@ -567,13 +575,49 @@ void return_text_coord(section &sk, section z) // Пересчитываем текстурные коорд
 	return;
 }
 
-point_3d Sphere_to_Dekart(type_coordinates r, type_coordinates x, type_coordinates y)
+point_3d Sphere_to_Dekart(Sphere_syst SK)
 {
 	point_3d pos;
-	pos.y = r * cos(x) * cos(y);
-	pos.z = r * sin(x);
-	pos.x = r * cos(x) * sin(y);
+	pos.z = SK.Radius * cos(SK.Theta * Pi / 180);
+	pos.x = SK.Radius * sin(SK.Theta * Pi / 180) * cos(SK.Alpha * Pi / 180);
+	pos.y = SK.Radius * sin(SK.Theta * Pi / 180) * sin(SK.Alpha * Pi / 180);
 	return pos;
+}
+
+void Draw_smooth_normals() {
+	Point3D k(0, 0, 0);
+	for (int i = 0; i < figure.mass_point.size(); i++)
+	{
+		int count_normals_for_point = 0;
+		for (int j = 0; j < figure.platan.size(); j++)
+			if (have_platan_the_point(figure.platan[j], figure.mass_point[i]))
+			{
+				k = k + figure.platan[j].vec_normal;
+				count_normals_for_point++;
+			}
+
+		k = k / count_normals_for_point;
+
+		Point3D a(k.x + figure.mass_point[i].x,
+			k.y + figure.mass_point[i].y,
+			k.z + figure.mass_point[i].z);
+
+		Point3D b(-k.x + figure.mass_point[i].x,
+			-k.y + figure.mass_point[i].y,
+			-k.z + figure.mass_point[i].z);
+
+		glBegin(GL_LINES); // Просто линия
+		glLineWidth(5000);
+		glColor3f(0.0f, 0.0f, 0.0f); // Черный
+		glVertex3d(a.x - figure.center_of_mass.x
+			, a.y - figure.center_of_mass.y
+			, a.z - figure.center_of_mass.z);
+		glVertex3d(b.x - figure.center_of_mass.x
+			, b.y - figure.center_of_mass.y
+			, b.z - figure.center_of_mass.z);
+		glEnd();
+
+	}
 }
 
 void Display(void)
@@ -589,7 +633,7 @@ void Display(void)
 	}
 	else glDisable(GL_DEPTH_TEST);
 
-	// Включение двойного буфера  (?????? Как он работает)
+	// Включение двойного буфера 
 	if(double_buff == 1)
 		glutInitDisplayMode(GLUT_DOUBLE);
 	else
@@ -729,11 +773,8 @@ void Display(void)
 	}
 	//
 
-	// Сглаженные нормали
-	/*
-	if (smooth_normal == 1)
-		DrawSmoothNormals();*/
-
+	if (smooth_normal)
+		Draw_smooth_normals();
 
 	glFinish();
 	
@@ -743,7 +784,7 @@ void Display(void)
 void Reshape(GLint w, GLint h)	//Функция изменения размеров окна
 {
 	Display();
-	point_3d spect;
+	point_3d spect; 
 	Width = w;    Height = h;
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -778,8 +819,9 @@ void Reshape(GLint w, GLint h)	//Функция изменения размеров окна
 		}
 	}
 
-	spect = Sphere_to_Dekart(spectator.x * Pi / 180, spectator.y * Pi / 180, spectator.z);
-	gluLookAt(spect.x, spect.y, spect.z, 0, 0, -1, 0, 1, 0); 
+	spect = Sphere_to_Dekart(SystemCoordinate);
+	gluLookAt(spect.x, spect.y, spect.z, 
+		0, 0, 0, 0, 1, 0); 
 	glMatrixMode(GL_MODELVIEW); //Возврат к матрице модели
 	glLoadIdentity();
 }
@@ -788,17 +830,19 @@ enum keys
 {
 	KeyW, KeyA, KeyS, KeyD,
 	KeyZ, KeyX, KeyC, KeyV, KeyB, KeyN,
-	KeyO, KeyP, KeySpace,
-	Key1, Key2, Key3, Key4, Key5,
-	Key_Num10, Key_Num11, Empty
+	KeyO, KeyP, Empty
 };
 
 void Keyboard(unsigned char key, int xx, int yy)
 {
+	// Свет
+	if (key == 'l') {
+		light = !light;
+	}
+	
 	//Каркасный режим
 	if (key == 'z') {
 		carcass = !carcass;
-		texture = false;
 	}
 
 	//Наложение текстуры
@@ -812,10 +856,9 @@ void Keyboard(unsigned char key, int xx, int yy)
 	if (key == 'v') //Сглаженные нормали
 		smooth_normal = !smooth_normal;
 
-	/*
-	if (key == 'b') //Сглаженные нормали
-		grid = !grid;
-	*/
+	if (key == 'i') //Глубинный тест
+		buff_depth = !buff_depth;
+
 
 	if (key == 'p') //Перспективная проекция
 	{
@@ -828,37 +871,35 @@ void Keyboard(unsigned char key, int xx, int yy)
 	}
 
 	if (key == 'w') {
-		if (spectator.x + 15 < 90)	{
-			if (spectator.x == -89 || spectator.y + 15 == 90)
-				spectator.x += 14;
-			else
-				spectator.x += 15;
-		}
+		if (SystemCoordinate.Theta + 5 <= 180)
+			SystemCoordinate.Theta += 5;
 	}
 
 	if (key == 's') {
-		if (spectator.y - 15 > -90) {
-			if (spectator.y == 89 || spectator.y - 15 == -90)
-				spectator.y -= 14;
-			else
-				spectator.y -= 15;
-		}
+		if(SystemCoordinate.Theta - 5 > 0)
+			SystemCoordinate.Theta -= 5;
 	}
 
 	if (key == 'a') {
-		spectator.x += 15;
+		if (SystemCoordinate.Alpha + 5 < 360)
+			SystemCoordinate.Alpha += 5;
+		else
+			SystemCoordinate.Alpha = 0;
 	}
 
 	if (key == 'd') {
-		spectator.x -= 15;
+		if (SystemCoordinate.Alpha - 5 >= 0)
+			SystemCoordinate.Alpha -= 5;
+		else
+			SystemCoordinate.Alpha = 360;
 	}
 
 	if (key == '-') {
-		spectator.z += 0.5;
+		SystemCoordinate.Radius -= 0.01;
 	}
 	
-	if (key == '+') {
-		spectator.z -= 0.5;
+	if (key == '=') {
+		SystemCoordinate.Radius += 0.01;
 	}
 	
 	
@@ -871,17 +912,11 @@ void Menu(int pos)
 
 	switch (key)
 	{
-	case Key1: Keyboard('1', 0, 0); break;
-	case Key2: Keyboard('2', 0, 0); break;
-	case Key3: Keyboard('3', 0, 0); break;
-	case Key4: Keyboard('4', 0, 0); break;
 
 	case KeyW: Keyboard('w', 0, 0); break;
 	case KeyS: Keyboard('s', 0, 0); break;
 	case KeyA: Keyboard('a', 0, 0); break;
 	case KeyD: Keyboard('d', 0, 0); break;
-	case Key_Num10: Keyboard('+', 0, 0); break;
-	case Key_Num11: Keyboard('-', 0, 0); break;
 
 	case KeyO: Keyboard('o', 0, 0); break;
 	case KeyP: Keyboard('p', 0, 0); break;
@@ -893,21 +928,6 @@ void Menu(int pos)
 	case KeyB: Keyboard('b', 0, 0); break;
 
 	default:
-
-		int menu_texture = glutCreateMenu(Menu);
-		glutAddMenuEntry("Текстура №1 (1)", Key1);
-		glutAddMenuEntry("Текстура №2 (2)", Key2);
-		glutAddMenuEntry("Текстура №3 (3)", Key3);
-		glutAddMenuEntry("Текстура №4 (4)", Key4);
-
-		int menu_move = glutCreateMenu(Menu);
-		glutAddMenuEntry("Вверх (W)", KeyW);
-		glutAddMenuEntry("Вниз (S)", KeyS);
-		glutAddMenuEntry("Bлево (A)", KeyA);
-		glutAddMenuEntry("Вправо (D)", KeyD);
-		glutAddMenuEntry("Приблизить камеру (Num '-')", Key_Num11);
-		glutAddMenuEntry("Отдалить камеру (Num '+')", Key_Num10);
-
 		int menu_projection = glutCreateMenu(Menu);
 		glutAddMenuEntry("Перспективная проекция (P)", KeyP);
 		glutAddMenuEntry("Ортографическая проекция (O)", KeyO);
@@ -918,18 +938,11 @@ void Menu(int pos)
 		glutAddMenuEntry("Показ нормалей (С)", KeyC);
 		glutAddMenuEntry("Показ сглаженных нормалей (V)", KeyV);
 
-		//Интерфейс меню
-		int menu = glutCreateMenu(Menu);
-		glutAddSubMenu("Отображение", menu_show);
-		glutAddSubMenu("Проекции", menu_projection);
-		glutAddSubMenu("Перемещение по экрану", menu_move);
-		glutAddSubMenu("Смена текстуры", menu_texture);
 
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
 		Keyboard(Empty, 0, 0);
 	}
 }
-
 
 int main(int argc, char* argv[])
 {

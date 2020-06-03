@@ -201,6 +201,13 @@ bool have_common_line(object fig, int i, int j, int& index_edge_i, int& index_ed
 	return 0;
 }
 
+bool have_platan_the_point(section s, Point3D p) {
+	for (int i = 0; i < s.points.size(); i++)
+		if (p == s.points[i])
+			return true;
+	return false;
+}
+
 type_coordinates norma_vec(Point3D K) {
 	return sqrt(pow(K.x, 2) + pow(K.y, 2) + pow(K.z, 2));
 }
