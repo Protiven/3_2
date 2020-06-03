@@ -419,15 +419,15 @@ int Width = 800, Height = 800;
 using namespace std;
 
 object figure;
-point_3d spectator(150, 150, 150);
+point_3d spectator(0, 0, 2); // x - расстояние от объекта
 
-bool buff_depth = 1;
+bool buff_depth = 0;
 bool double_buff = 1;
 bool light = 0;
 int type_source_light = 0; 
 
 bool carcass = 0;
-bool show_normals = 1;
+bool show_normals = 0;
 
 unsigned char* tex_2d = 0; // stat_load_texture ... Сама картинка
 int width_text;
@@ -436,8 +436,8 @@ bool texture = 1;
 bool stat_load_texture = 0;
 FILE* file = fopen("texture.bmp", "rb");
 
-bool ortho_or_perspective = 1; // 0 - ортографич, 1 - перспективная
-float perspective_angle = 150;
+bool ortho_or_perspective = 0; // 0 - ортографич, 1 - перспективная
+float perspective_angle = 30;
 float perspective_ratio = 1;
 
 
@@ -580,6 +580,7 @@ void Display(void)
 {
 	glClearColor(0.2, 0.2, 0.2, 1); glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
+	glEnable(GL_NORMALIZE);
 
 	// Включение буффера
 	if (buff_depth == 1) {
@@ -594,41 +595,28 @@ void Display(void)
 	else
 		glutInitDisplayMode(GLUT_SINGLE);
 
-	// Включение света
-	if (light == 1)
-	{
-		glEnable(GL_LIGHTING);	
-		glEnable(GL_LIGHT0); // !!!! В зависимости от типа света нужно менять аргумент
-	}
-	else
-	{
-		glDisable(GL_LIGHT0); // !!!! В зависимости от типа света нужно менять аргумент
-		glDisable(GL_LIGHTING);
-	}
 
-	//glTranslatef(0, 0.0, 0.0f);
-	//bool flag = false;
-	
+
 	// Текстурирование
 	if (texture == 1)
 	{
 		unsigned char data54[54]; // служебный заголовок 54 байта
 
 		if (file != NULL) { // Подгрузка текстуры, если файл открыт (после поток вывода из файла зануляется P.S. Все равно, что текстура уже загружена)
-			int err = fread(data54, 1, 54, file);
+			fread(data54, 1, 54, file);
 			int size = *(data54 + 10);
 
 			int width = *(data54 + 18);
 			int height = *(data54 + 22);
 			unsigned char* Pixels = new unsigned char[Width * Height * 3];
-			err = fread(Pixels, Width * Height * 3, 1, file);
+			
+			fread(Pixels, Width * Height * 3, 1, file);
 			fclose(file);
 			file = NULL;
 			int Type = GL_BGR_EXT;
-
 			GLuint tex;
-			glEnable(GL_TEXTURE_2D);			//Разрешение отображения текстур
-			glGenTextures(1, &tex);				//Генерация массива номеров текстур
+			glEnable(GL_TEXTURE_2D);				//Разрешение отображения текстур
+			glGenTextures(1, &tex);					//Генерация массива номеров текстур
 			glBindTexture(GL_TEXTURE_2D, tex);	//Выбор текущей текстуры по номеру
 			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, Pixels);	//Задание режима выравнивания
 			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);	//Задание режима учета параметров материала
@@ -702,12 +690,26 @@ void Display(void)
 		tex_2d = 0;
 	}
 	
+	// Включение света
+	if (light == 1)
+	{
+		glEnable(GL_NORMALIZE);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0); // !!!! В зависимости от типа света нужно менять аргумент
+	}
+	else
+	{
+		glDisable(GL_LIGHT0); // !!!! В зависимости от типа света нужно менять аргумент
+		glDisable(GL_LIGHTING);
+	}
+
 
 	if (show_normals == 1)
 		show_normals_func(figure);
 
 
 	if (carcass == 1) {
+
 		glDisable(GL_DEPTH_TEST);
 		// Рисуем каркасс
 		for (int i = 0; i < figure.platan.size(); i++) {
@@ -735,11 +737,12 @@ void Display(void)
 
 	glFinish();
 	
-	glutSwapBuffers(); // Для двойной буффер.
+	glutSwapBuffers(); // Для двойного буффера
 }
 
 void Reshape(GLint w, GLint h)	//Функция изменения размеров окна
 {
+	Display();
 	point_3d spect;
 	Width = w;    Height = h;
 	glViewport(0, 0, w, h);
@@ -760,20 +763,23 @@ void Reshape(GLint w, GLint h)	//Функция изменения размеров окна
 	glMatrixMode(GL_PROJECTION);//Устанавливаем матрицу проекции
 	glLoadIdentity();			//Загружаем единичную матрицу
 
-	//Перспективная проекция
+	//Перспективная проекция 
 	if (ortho_or_perspective == 1)
 		gluPerspective(perspective_angle, perspective_ratio, 0.1f, 100.0f);
-	//Ортографическая проекция
+	//Ортографическая проекция  
 	else
 	{
-/*		if (Width >= Height)
-			glOrtho(-mn * ratio, mn * ratio, -mn, mn, -100.0f, 100.0f);
-		else
-			glOrtho(-mn, mn, -mn / ratio, mn / ratio, -100.0f, 100.0f);*/
+		double aspect = Width / double(Height);
+		if (Width >= Height) {
+			gluOrtho2D(-1. * aspect, 1. * aspect, -1., 1.);
+		}
+		else {
+			gluOrtho2D(-1., 1., -1. / aspect, 1. / aspect);
+		}
 	}
 
-	//spect = Sphere_to_Dekart(spectator.x * Pi / 180, spectator.y * Pi / 180, spectator.z);
-	//gluLookAt(spect.x, spect.y, spect.z, 0, 0, 0, 0, 0, 1);
+	spect = Sphere_to_Dekart(spectator.x * Pi / 180, spectator.y * Pi / 180, spectator.z);
+	gluLookAt(spect.x, spect.y, spect.z, 0, 0, -1, 0, 1, 0); 
 	glMatrixMode(GL_MODELVIEW); //Возврат к матрице модели
 	glLoadIdentity();
 }
@@ -789,97 +795,74 @@ enum keys
 
 void Keyboard(unsigned char key, int xx, int yy)
 {
-	/*
-	if (key == '1')
-		texture_num = 1;
-
-	if (key == '2')
-		texture_num = 2;
-
-	if (key == '3')
-		texture_num = 3;
-
-	if (key == '4')
-		texture_num = 4;
-
-	if (key == '5')
-		texture_num = 5;
-
-	if (key == 'z') //Каркасный режим
-	{
-		karkas = !karkas;
-		texture_act = false;
+	//Каркасный режим
+	if (key == 'z') {
+		carcass = !carcass;
+		texture = false;
 	}
 
-	if (key == 'x') //Наложение текстуры
-	{
-		texture_act = !texture_act;
+	//Наложение текстуры
+	if (key == 'x') {
+		texture = !texture;
 	}
 
 	if (key == 'c') //Показ нормалей
-		normals = !normals;
+		show_normals = !show_normals;
 
 	if (key == 'v') //Сглаженные нормали
 		smooth_normal = !smooth_normal;
 
+	/*
 	if (key == 'b') //Сглаженные нормали
 		grid = !grid;
+	*/
 
 	if (key == 'p') //Перспективная проекция
 	{
-		proekcia = 1;
-		glutReshapeWindow(Width + 1, Height);
+		ortho_or_perspective = 1;
 	}
 
 	if (key == 'o') //Ортографическая проекция
 	{
-		proekcia = 0;
-		glutReshapeWindow(Width - 1, Height);
+		ortho_or_perspective = 0;
 	}
 
-	if (key == 'w')
-	{
-		if (cam_y + 15 < 90)
-		{
-			if (cam_y == -89 || cam_y + 15 == 90)
-				cam_y += 14;
+	if (key == 'w') {
+		if (spectator.x + 15 < 90)	{
+			if (spectator.x == -89 || spectator.y + 15 == 90)
+				spectator.x += 14;
 			else
-				cam_y += 15;
-			Reshape(Width, Height);
+				spectator.x += 15;
 		}
 	}
-	if (key == 's')
-	{
-		if (cam_y - 15 > -90)
-		{
-			if (cam_y == 89 || cam_y - 15 == -90)
-				cam_y -= 14;
-			else
-				cam_y -= 15;
-			Reshape(Width, Height);
-		}
-	}
-	if (key == 'a')
-	{
-		cam_x += 15;
-		Reshape(Width, Height);
 
+	if (key == 's') {
+		if (spectator.y - 15 > -90) {
+			if (spectator.y == 89 || spectator.y - 15 == -90)
+				spectator.y -= 14;
+			else
+				spectator.y -= 15;
+		}
 	}
-	if (key == 'd')
-	{
-		cam_x -= 15;
-		Reshape(Width, Height);
+
+	if (key == 'a') {
+		spectator.x += 15;
 	}
-	if (key == '-')
-	{
-		zoom += 0.5;
-		Reshape(Width, Height);
+
+	if (key == 'd') {
+		spectator.x -= 15;
 	}
-	if (key == '+')
-	{
-		zoom -= 0.5;
-		Reshape(Width, Height);
-	}*/
+
+	if (key == '-') {
+		spectator.z += 0.5;
+	}
+	
+	if (key == '+') {
+		spectator.z -= 0.5;
+	}
+	
+	
+	Reshape(Width, Height);
 }
 
 void Menu(int pos)

@@ -26,12 +26,12 @@ C:\Users\Марина\Documents\GitHub\3_2\Компьютерная график
 C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(549,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(554,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(562,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(637,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(656,23): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(675,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(691,23): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(713,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(714,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(651,9): warning C4101: k: неиспользованная локальная переменная
-C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(689,9): warning C4101: k: неиспользованная локальная переменная
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(625,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(644,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(663,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(679,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(715,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(716,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(639,9): warning C4101: k: неиспользованная локальная переменная
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\MAIN.cpp(677,9): warning C4101: k: неиспользованная локальная переменная
   GLUT.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Debug\GLUT.exe
