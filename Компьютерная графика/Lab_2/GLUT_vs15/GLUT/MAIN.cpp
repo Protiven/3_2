@@ -337,7 +337,7 @@ void Display(void)
 		glEnable(GL_NORMALIZE);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0); // !!!! ¬ зависимости от типа света нужно мен€ть аргумент
-		GLfloat light0_position[] = { 0.2, 0.2, 0.2, 1.0 };
+		GLfloat light0_position[] = { 0.0, 0.0, 0.7, 1.0 };
 		glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 	}
 	else
