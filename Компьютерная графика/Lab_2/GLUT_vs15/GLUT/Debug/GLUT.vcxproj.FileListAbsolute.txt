@@ -1,2 +1,4 @@
 C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Debug\GLUT.exe
 C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Debug\GLUT.pdb
+C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Debug\GLUT.exe
+C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\Lab_2\GLUT_vs15\GLUT\Debug\GLUT.pdb
