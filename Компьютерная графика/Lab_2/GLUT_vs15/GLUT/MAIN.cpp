@@ -421,7 +421,7 @@ using namespace std;
 object figure;
 //point_3d spectator(0, 0, 0.1); // x - расстояние от объекта
 
-bool buff_depth = 0;
+bool buff_depth = 1;
 bool double_buff = 1;
 bool light = 0;
 int type_source_light = 0; 
@@ -432,7 +432,7 @@ bool show_normals = 0;
 unsigned char* tex_2d = 0; // stat_load_texture ... Сама картинка
 int width_text;
 int height_text;
-bool texture = 1;
+bool texture = 0;
 bool stat_load_texture = 0;
 FILE* file = fopen("texture.bmp", "rb");
 
@@ -722,7 +722,7 @@ void Display(void)
 
 				for (int z = 0; z < figure.platan[i].sequence.size(); z++)
 				{
-					glColor3f(1 - float(i) / figure.platan.size(), 1 - float(i) / figure.platan.size(), 1); // Черный
+					///glColor3f(1 - float(i) / figure.platan.size(), 1 - float(i) / figure.platan.size(), 1); // Черный
 					glVertex3d(figure.platan[i].points[figure.platan[i].sequence[z]].x - figure.center_of_mass.x,
 						figure.platan[i].points[figure.platan[i].sequence[z]].y - figure.center_of_mass.y,
 						figure.platan[i].points[figure.platan[i].sequence[z]].z - figure.center_of_mass.z);
@@ -740,6 +740,8 @@ void Display(void)
 		glEnable(GL_NORMALIZE);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0); // !!!! В зависимости от типа света нужно менять аргумент
+		GLfloat light0_position[] = { 0.2, 0.2, 0.2, 1.0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 	}
 	else
 	{
