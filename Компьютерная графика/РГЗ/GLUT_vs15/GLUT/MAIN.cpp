@@ -15,6 +15,10 @@ using namespace std;
 vector<Point> points;
 vector<Point> true_array_point;
 
+typedef float type;
+
+type scale = 1;
+
 void Display(void) {
 	glClearColor(0.9, 0.9, 0.9, 1); 
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -22,7 +26,7 @@ void Display(void) {
 
 
 	// Рисование осей координат
-	draw_axis(Width, Height);
+	draw_axis(Width, Height, scale);
 	//
 
 	// Печать точек, к которым будет производиться интерполяция
@@ -35,7 +39,7 @@ void Display(void) {
 		glBegin(GL_POINTS);
 		for (int i = 0; i < size; i++) { 
 			glColor3ub(0, 0, 0);
-			glVertex2i(true_array_point[i].x + Width / 2, true_array_point[i].y + Height / 2);
+			glVertex2i(true_array_point[i].x * scale + Width / 2, true_array_point[i].y * scale + Height / 2);
 		}
 		glEnd();
 	}
@@ -43,7 +47,7 @@ void Display(void) {
 
 
 	// Интерполяция
-	interpolation_func(points, true_array_point, Width, Height);
+	interpolation_func(points, true_array_point, Width, Height, scale);
 	//
 
 	glFinish();
@@ -83,6 +87,20 @@ void Keyboard(unsigned char key, int xx, int yy)
 	if (key == '=') {
 			n_power_interpolation++;
 	}
+
+	// Уменьшение масштаба
+	if (key == '1')
+		if (scale - 0.05 > 0)
+			scale -= 0.05;
+
+	// Увеличение масштаба
+	if (key == '2')
+		if (scale + 0.05 <= 1.30)
+			scale += 0.05;
+
+	// Сброс масштаба
+	if (key == '3')
+		scale = 1;
 
 
 	sprintf(message, "Power interpolation %d", n_power_interpolation);
@@ -132,7 +150,12 @@ void Mouse(int button, int state, int x, int y)  {
 	if (state != GLUT_DOWN) return;
 
 	if (button == GLUT_LEFT_BUTTON)	{
-		points.push_back(Point(x, Height - y));
+		if (scale == 1)
+			points.push_back(Point(x, Height - y));
+		else {
+			glutSetWindowTitle("You need to throw off the scale value (3) for adding points!");
+			system("pause");
+		}
 	}
 
 	// Удаляем точку ближайшую к положению

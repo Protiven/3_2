@@ -29,7 +29,7 @@ void sort_points(vector<Point> &k) {
       }
 }
 
-void draw_axis(int width, int height) {
+void draw_axis(int width, int height, type_p scale) {
    Point OX_beg(0, height / 2),
       OX_fin(width, height / 2),
       OY_beg(width / 2, 0),
@@ -38,6 +38,8 @@ void draw_axis(int width, int height) {
    type_p x_split = abs(OX_fin.x - OX_beg.x) / count_delim,
       y_split = abs(OY_fin.y - OY_beg.y) / count_delim;
 
+   Point center(width / 2, height / 2);
+
    glLineWidth(0.1);
    glBegin(GL_LINES);
    glColor3d(0, 0, 0);
@@ -45,17 +47,20 @@ void draw_axis(int width, int height) {
    glVertex2f(OX_beg.x, OX_beg.y);
    glVertex2f(OX_fin.x, OX_fin.y);
 
-   for (int i = 0; i < count_delim; i++) {
-      glVertex2f(OX_beg.x + i * x_split, OX_beg.y + 5);
-      glVertex2f(OX_beg.x + i * x_split, OX_fin.y - 5);
+
+
+   for (int i = -count_delim / 2; i <= count_delim / 2; i++) {
+      glVertex2f(center.x + i * x_split * scale, center.y + 5);
+      glVertex2f(center.x + i * x_split * scale, center.y - 5);
    }
 
    glVertex2f(OY_beg.x, OY_beg.y);
    glVertex2f(OY_fin.x, OY_fin.y);
 
-   for (int i = 0; i < count_delim; i++) {
-      glVertex2f(OY_beg.x - 5, OY_beg.y + i * y_split);
-      glVertex2f(OY_fin.x + 5, OY_beg.y + i * y_split);
+
+   for (int i = -count_delim / 2; i <= count_delim / 2; i++) {
+      glVertex2f(center.x - 5, center.y + i * y_split * scale);
+      glVertex2f(center.x + 5, center.y + i * y_split * scale);
    }
    
    glEnd();
@@ -78,7 +83,7 @@ void func_init_true_points(vector<Point> arr_points, vector<Point> &true_array_p
       true_array_point.push_back(Point(arr_points[i].x - width / 2, arr_points[i].y - height / 2));
 }
 
-void interpolation_func(vector<Point> arr_points, vector<Point> true_array_point, int width, int height) {
+void interpolation_func(vector<Point> arr_points, vector<Point> true_array_point, int width, int height, type_p scale) {
    if (arr_points.size() < n_power_interpolation + 1) {
       char kp[250];
       sprintf(kp, "There aren't enough points for this degree. You need %d points. Now %d", n_power_interpolation + 1, arr_points.size());
@@ -103,9 +108,10 @@ void interpolation_func(vector<Point> arr_points, vector<Point> true_array_point
    //
 
    // Отрисовка сплайна
+   glColor3d(1, 0, 0);
    glBegin(GL_LINE_STRIP);
    for (int i = 0; i < Lagranzh.size(); i++)
-      glVertex2d(Lagranzh[i].x + width / 2, Lagranzh[i].y + height / 2); // Переход обратно к координатам окна
+      glVertex2d(Lagranzh[i].x * scale + width / 2, Lagranzh[i].y * scale + height / 2); // Переход обратно к координатам окна
    glEnd();
    //
    Lagranzh.clear();
