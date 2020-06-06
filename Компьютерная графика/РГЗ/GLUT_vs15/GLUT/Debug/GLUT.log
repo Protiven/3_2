@@ -1,8 +1,8 @@
 ﻿  MAIN.cpp
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(22,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(67,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(77,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(82,26): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(107,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\MAIN.cpp(130,22): warning C4018: <: несоответствие типов со знаком и без знака
-  GLUT.vcxproj -> C:\Users\Слава\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\Debug\GLUT.exe
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(22,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(72,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(82,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(87,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\library.h(113,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\MAIN.cpp(166,22): warning C4018: <: несоответствие типов со знаком и без знака
+  GLUT.vcxproj -> C:\Users\Марина\Documents\GitHub\3_2\Компьютерная графика\РГЗ\GLUT_vs15\GLUT\Debug\GLUT.exe
