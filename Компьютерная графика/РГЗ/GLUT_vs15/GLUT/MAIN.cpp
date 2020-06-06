@@ -84,48 +84,35 @@ void Keyboard(unsigned char key, int xx, int yy)
 			n_power_interpolation++;
 	}
 
+	int size = points.size();
+	if (size > 0) {
+		
+		switch (key) {
+		case 'w':
+			for (int i = size; i > -1; i--)
+				points[i].y += 5;
+			break;
+		case 's':
+			for (int i = size; i > -1; i--)
+				points[i].y -= 5;
+			break;
+		case 'a':
+			for (int i = size; i > -1; i--)
+				points[i].x -= 5;
+			break;
+		case 'd':
+			for (int i = size; i > -1; i--)
+				points[i].x += 5;
+			break;
+		default:
+			break;
+		}
+	}
+
 
 	sprintf(message, "Power interpolation %d", n_power_interpolation);
 	glutSetWindowTitle(message);
 	glutPostRedisplay();
-}
-
-void Menu(int pos)
-{
-	int key = (keys)pos;
-
-	switch (key)
-	{
-
-	case KeyW: Keyboard('w', 0, 0); break;
-	case KeyS: Keyboard('s', 0, 0); break;
-	case KeyA: Keyboard('a', 0, 0); break;
-	case KeyD: Keyboard('d', 0, 0); break;
-
-	case KeyO: Keyboard('o', 0, 0); break;
-	case KeyP: Keyboard('p', 0, 0); break;
-
-	case KeyZ: Keyboard('z', 0, 0); break;
-	case KeyX: Keyboard('x', 0, 0); break;
-	case KeyC: Keyboard('c', 0, 0); break;
-	case KeyV: Keyboard('v', 0, 0); break;
-	case KeyB: Keyboard('b', 0, 0); break;
-
-	default:
-		int menu_projection = glutCreateMenu(Menu);
-		glutAddMenuEntry("Перспективная проекция (P)", KeyP);
-		glutAddMenuEntry("Ортографическая проекция (O)", KeyO);
-
-		int menu_show = glutCreateMenu(Menu);
-		glutAddMenuEntry("Каркасный режим (Z)", KeyZ);
-		glutAddMenuEntry("Наложение текстуры (X)", KeyX);
-		glutAddMenuEntry("Показ нормалей (С)", KeyC);
-		glutAddMenuEntry("Показ сглаженных нормалей (V)", KeyV);
-
-
-		glutAttachMenu(GLUT_RIGHT_BUTTON);
-		Keyboard(Empty, 0, 0);
-	}
 }
 
 void Mouse(int button, int state, int x, int y)  {
@@ -135,7 +122,7 @@ void Mouse(int button, int state, int x, int y)  {
 		points.push_back(Point(x, Height - y));
 	}
 
-	// Удаляем точку ближайшую к положению
+	// Удаляем точку ближайшую к положению курсора
 	if (button == GLUT_MIDDLE_BUTTON) {
 		if (points.size() != 0) {
 			int k = 0;
@@ -161,7 +148,6 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGB);
 	glutInitWindowSize(Width, Height);
 	glutCreateWindow("Текущий цвет всех точек:");
-	Menu(Empty);
 	glutDisplayFunc(Display);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);
