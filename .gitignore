@@ -4,4 +4,9 @@
 *.obj
 *.idb
 *.pdb
+*.db
+*.suo
+*.exe
+*.ilk
+*.log
 *.tmp
