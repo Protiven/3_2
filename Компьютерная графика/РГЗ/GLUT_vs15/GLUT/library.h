@@ -1,6 +1,10 @@
 #include "glut.h"
 
-#define count_delim 10
+#define count_delim 30
+#define koef 6
+#define FONT (void*)3
+
+
 int n_power_interpolation;
 
 using namespace std;
@@ -29,41 +33,63 @@ void sort_points(vector<Point> &k) {
       }
 }
 
+void print_string(type_p x, type_p y, char* str) {
+   glRasterPos2f(x, y);
+   for (char* k = str; k[0] != '\0'; k++)
+      glutBitmapCharacter(FONT, (int)k[0]);
+}
+
 void draw_axis(int width, int height, type_p scale) {
    Point OX_beg(0, height / 2),
       OX_fin(width, height / 2),
       OY_beg(width / 2, 0),
       OY_fin(width / 2, height);
 
-   type_p x_split = abs(OX_fin.x - OX_beg.x) / count_delim,
-      y_split = abs(OY_fin.y - OY_beg.y) / count_delim;
+   type_p x_split = abs(OX_fin.x * koef - OX_beg.x) / count_delim,
+      y_split = abs(OY_fin.y * koef - OY_beg.y) / count_delim;
 
    Point center(width / 2, height / 2);
 
    glLineWidth(0.1);
-   glBegin(GL_LINES);
-   glColor3d(0, 0, 0);
 
+   glColor3d(0, 0, 0);
+   glBegin(GL_LINES);
    glVertex2f(OX_beg.x, OX_beg.y);
    glVertex2f(OX_fin.x, OX_fin.y);
-
-
-
+   glEnd();
+   
+   char k[10];
    for (int i = -count_delim / 2; i <= count_delim / 2; i++) {
+      if (i != 0) {
+         sprintf(k, "%d", i);
+         print_string(center.x + i * x_split * scale + 20, center.y - 20, k);
+      }
+
+      glColor3d(0, 0, 0);
+      glBegin(GL_LINES);
       glVertex2f(center.x + i * x_split * scale, center.y + 5);
       glVertex2f(center.x + i * x_split * scale, center.y - 5);
+      glEnd();
    }
 
+   glColor3d(0, 0, 0);
+   glBegin(GL_LINES);
    glVertex2f(OY_beg.x, OY_beg.y);
    glVertex2f(OY_fin.x, OY_fin.y);
-
+   glEnd();
 
    for (int i = -count_delim / 2; i <= count_delim / 2; i++) {
+      if (i != 0) {
+         sprintf(k, "%d", i);
+         print_string(center.x + 8, center.y + i * y_split * scale + 8, k);
+      }
+
+      glColor3d(0, 0, 0);
+      glBegin(GL_LINES);
       glVertex2f(center.x - 5, center.y + i * y_split * scale);
       glVertex2f(center.x + 5, center.y + i * y_split * scale);
+      glEnd();
    }
-   
-   glEnd();
 }
 
 type_p L_i_func(vector<Point> arr_points, int i, type_p x) {
@@ -102,7 +128,7 @@ void interpolation_func(vector<Point> arr_points, vector<Point> true_array_point
    for (int x = 0; x < width; x++) {
       type_p y = 0;
       for (int i = 0; i < n_power_interpolation + 1; i++)
-         y += true_array_point[i].y * L_i_func(true_array_point, i, x - width / 2);
+         y += true_array_point[i].y * L_i_func(true_array_point, i, x - width/ 2);
       Lagranzh.push_back(Point(x - width / 2, y));
    }   
    //
