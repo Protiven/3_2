@@ -1,5 +1,5 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
-#include<stdlib.h>
+#include <stdlib.h>
 #include <vector>
 #include <fstream>
 #include <stack>
@@ -20,7 +20,7 @@ typedef float type;
 type scale = 1;
 
 void Display(void) {
-	glClearColor(0.9, 0.9, 0.9, 1); 
+	glClearColor(1, 1, 1, 1); 
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
@@ -93,19 +93,19 @@ void Keyboard(unsigned char key, int xx, int yy)
 		
 		switch (key) {
 		case 'w':
-			for (int i = size; i > -1; i--)
+			for (int i = size - 1; i > -1; i--)
 				points[i].y += 5;
 			break;
 		case 's':
-			for (int i = size; i > -1; i--)
+			for (int i = size - 1; i > -1; i--)
 				points[i].y -= 5;
 			break;
 		case 'a':
-			for (int i = size; i > -1; i--)
+			for (int i = size - 1; i > -1; i--)
 				points[i].x -= 5;
 			break;
 		case 'd':
-			for (int i = size; i > -1; i--)
+			for (int i = size - 1; i > -1; i--)
 				points[i].x += 5;
 			break;
 		default:
@@ -114,12 +114,12 @@ void Keyboard(unsigned char key, int xx, int yy)
 	}
 	// Уменьшение масштаба
 	if (key == '1')
-		if (scale - 0.05 > 0)
+		if (scale - 0.05 >= 0.2)
 			scale -= 0.05;
 
 	// Увеличение масштаба
 	if (key == '2')
-		if (scale + 0.05 <= 1.30)
+		if (scale + 0.05 <= 1.50)
 			scale += 0.05;
 
 	// Сброс масштаба
@@ -139,13 +139,12 @@ void Mouse(int button, int state, int x, int y)  {
 		if (scale == 1)
 			points.push_back(Point(x, Height - y));
 		else {
-			glutSetWindowTitle("You need to throw off the scale value (3) for adding points!");
-			system("pause");
+			system("echo You need to throw off the scale value (press '3' for the action) for adding points! & pause");
 		}
 	}
 
 	// Удаляем точку ближайшую к положению курсора
-	if (button == GLUT_MIDDLE_BUTTON) {
+	if (button == GLUT_RIGHT_BUTTON) {
 		if (points.size() != 0) {
 			int k = 0;
 			Point val(1000, 1000);
@@ -164,7 +163,7 @@ void Mouse(int button, int state, int x, int y)  {
 
 int main(int argc, char* argv[])
 {
-	if (!get_info()) return -1;
+	if (!get_info()) n_power_interpolation = 2;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB);
