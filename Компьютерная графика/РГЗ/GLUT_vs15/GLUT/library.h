@@ -118,6 +118,9 @@ void interpolation_func(vector<Point> arr_points, vector<Point> true_array_point
    }
    else
    {
+
+   }
+   {
       char kp[250];
       sprintf(kp, "Very well! Now %d points and power %d.",  arr_points.size(), n_power_interpolation);
       glutSetWindowTitle(kp);
