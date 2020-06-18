@@ -79,11 +79,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="additional_classes.cpp" />
+    <ClCompile Include="GMRES.cpp" />
     <ClCompile Include="grid_gen.cpp" />
     <ClCompile Include="grid_gen_cube.cpp" />
     <ClCompile Include="grid_gen_rect.cpp" />
     <ClCompile Include="launch.cpp" />
-    <ClCompile Include="solver_BCGStab.cpp" />
     <ClCompile Include="solver_LOS.cpp" />
     <ClCompile Include="solver_LU.cpp" />
   </ItemGroup>

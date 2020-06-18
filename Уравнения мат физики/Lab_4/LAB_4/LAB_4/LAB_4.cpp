@@ -106,8 +106,7 @@ void GMRES::SolutionSLAE_U(double* f, double*& x)
    delete[] f1;
 }
 
-void GMRES::SolutionSLAE(double*& solution, int& its)
-{
+void GMRES::SolutionSLAE(double*& solution, int& its) {
    // Параметры решателя
    int maxiter = 1000;
    double eps = 1E-14;
@@ -193,8 +192,7 @@ void GMRES::SolutionSLAE(double*& solution, int& its)
    delete[] h2;
 }
 
-void GMRES::mult_V_y(int mr, double* res)
-{
+void GMRES::mult_V_y(int mr, double* res) {
    long int k;
    int p;
    for (k = 0; k < n; k++)
@@ -274,7 +272,3 @@ void GMRES::gauss(double* M, double* vector, int mr)
          vector[i] = vector[i] - M[i * m + j] * vector[j];
 }
 
-
-void main(){
-   
-}

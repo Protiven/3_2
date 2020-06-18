@@ -11,7 +11,6 @@ void SLAE_port_list::init(){
 
 void SLAE_port_list::set_num(int s_num){
 	number_of_line = s_num;
-
 }
 
 
@@ -134,7 +133,7 @@ void SLAE_port_gen::add_el(FE &el_a){
 void SLAE_port_gen::gen(int *gi, int *&gj, int &m){
 	m = 0;
 	gi[0] = 0;
-	for(int i = 0; i < n; i++){
+	for(int i = 0; i < n; i++) {
 		gi[i] = m;
 		m += lists[i].size_before(i);
 	}

@@ -1,6 +1,7 @@
 #include "grid_gen_cube.h"
 
-int grid_gen_cube::generate_unreg_grid_pr(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, double h_zmin, double k_x, double k_y, double k_z, gen_point *&grid_mass){
+int grid_gen_cube::generate_unreg_grid_pr(gen_point left_bottom, gen_point right_top, double h_xmin, 
+	double h_ymin, double h_zmin, double k_x, double k_y, double k_z, gen_point *&grid_mass){
 	double* mass_x; // x-координаты точек
 	double* mass_y; // y-координаты точек
 	double* mass_z; // z-координаты точек
@@ -43,7 +44,8 @@ int grid_gen_cube::generate_unreg_grid_pr(gen_point left_bottom, gen_point right
 	return n;
 }
 
-int grid_gen_cube::generate_reg_grid_pr(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, double h_zmin, gen_point *&grid_mass){
+int grid_gen_cube::generate_reg_grid_pr(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, 
+	double h_zmin, gen_point *&grid_mass){
 
 	double* mass_x; // x-координаты точек
 	double* mass_y; // y-координаты точек
@@ -87,7 +89,8 @@ int grid_gen_cube::generate_reg_grid_pr(gen_point left_bottom, gen_point right_t
 	return n;
 }
 
-bool grid_gen_cube::generate_unreg_grid(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, double h_zmin, double k_x, double k_y, double k_z, std::string file_name){
+bool grid_gen_cube::generate_unreg_grid(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, 
+	double h_zmin, double k_x, double k_y, double k_z, std::string file_name){
 	//ѕроверка коректности данных, получение необходиммых данных
 	// оординаты дл€ начал отрезков генерации по перменным
 	double a_x = left_bottom.x;
@@ -125,7 +128,8 @@ bool grid_gen_cube::generate_unreg_grid(gen_point left_bottom, gen_point right_t
 }
 
 //» самое весЄлое - формирование и вывод элементов, часть там копипаст, кстати.
-bool grid_gen_cube::generate_unreg_grid_FEM(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, double h_zmin, double k_x, double k_y, double k_z, string file_cords, string file_elements, string file_faces){
+bool grid_gen_cube::generate_unreg_grid_FEM(gen_point left_bottom, gen_point right_top, double h_xmin, double h_ymin, double h_zmin, 
+	double k_x, double k_y, double k_z, string file_cords, string file_elements, string file_faces){
 
 	if(!generate_unreg_grid(left_bottom, right_top, h_xmin, h_ymin, h_zmin, k_x, k_y, k_z, file_cords)) return false; //¬ывод точек и проверка на корректность за одно
 

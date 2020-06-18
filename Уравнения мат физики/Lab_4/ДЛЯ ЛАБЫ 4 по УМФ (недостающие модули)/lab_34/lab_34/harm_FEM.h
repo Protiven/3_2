@@ -10,6 +10,7 @@
 #include "solver_LOS.h"
 #include "solver_LU.h"
 #include "solver_BCGStab.h"
+#include "GMRES.h"
 
 using namespace std;
 

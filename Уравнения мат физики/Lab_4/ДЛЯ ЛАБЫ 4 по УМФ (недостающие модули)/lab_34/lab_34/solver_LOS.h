@@ -6,6 +6,7 @@
 
 class LOS{
  public:
+	 double memory;
 	 void init(int* s_ig, int* s_jg, double* s_gu, double* s_gl, double* s_di, int s_n); //инициализаци€
 	 void set_rp(double* s_rp); //”становка правой части
 	 void solve(double *&solution, int &its); //ѕолучение решени€ и количества итераций

@@ -1,6 +1,7 @@
 #include "solver_LU.h"
 
 void solver_LU::init(int* s_ig, int* s_jg, double* s_gu, double* s_gl, double* s_di, int s_n){
+	this->memory = 0;
 	n = s_n;
 
 	di = new double [n];
@@ -46,16 +47,20 @@ void solver_LU::init(int* s_ig, int* s_jg, double* s_gu, double* s_gl, double* s
 		}
 	}
 
+	memory += sizeof(double) * n * 3 + sizeof(int) * (n + 1);
 	dec();
 }
 
 void solver_LU::set_rp(double *s_rp){
+	memory += sizeof(double) * n;
+
 	rp = new double [n];
 	for(int i = 0; i < n; i++)
 		rp[i] = s_rp[i];
 }
 
 void solver_LU::solve(double *&solution, int &its){
+	memory += sizeof(double) * n;
 
 	solution = new double [n];
 
@@ -81,7 +86,6 @@ void solver_LU::solve(double *&solution, int &its){
 		solution[i] = rp[i];
 
 	its = -1;
-
 }
 
 void solver_LU::dec(){

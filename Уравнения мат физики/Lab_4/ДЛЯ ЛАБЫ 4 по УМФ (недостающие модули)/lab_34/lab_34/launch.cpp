@@ -1,6 +1,7 @@
 #include "harm_FEM.h"
 #include "grid_gen_cube.h"
 #include <set>
+#include <time.h>
 
 using namespace std;
 
@@ -39,9 +40,9 @@ namespace test1{
 using namespace test1;
 
 int main(){
-	harm_FEM<LOS> our_meth_LOS;
-	harm_FEM<solver_LU> our_meth_LU;
-	harm_FEM<BCGStab> our_meth_BCGS;
+	harm_FEM <LOS> our_meth_LOS;
+	harm_FEM <solver_LU> our_meth_LU;
+	harm_FEM <GMRES> our_meth_GMRES;
 
 	//=========== Генерация сетки ===========
 
@@ -50,19 +51,25 @@ int main(){
 	string file_els = "els";
 	string file_face = "face";
 
+
+
 	//Координаты начала сетки по различным осям
 	double ax = 0, ay = 0, az = 0;
 	//Координаты конца сетки по различным осям
-	double bx = 1, by = 2, bz = 2;
+	double bx = 1, by = 1, bz = 1;
 
-	double h = 0.025;
+
+	///
+	double h = 0.2;
 	double k = 1.0001;
 	double k1 = sqrt(k);
 	double h1 = h/(1+k1);
+	/////////////
+
 
 
 	//Минимальные шаги по осям
-	double hx = 0.1, hy = 0.015, hz = 0.2;
+	double hx = 0.2, hy = 0.2, hz = 0.2;
 	//Коэффициенты разрядки по осям
 	double kx = k, ky = k, kz = k;
 
@@ -72,18 +79,27 @@ int main(){
 	printf("Grid gen\n");
 
 	//Собственно, генерция сетки
-	//grid_gen_cube::generate_reg_grid_FEM(st, en, hx, hy, hz, file_cords, file_els, file_face);
+	grid_gen_cube::generate_reg_grid_FEM(st, en, hx, hy, hz, file_cords, file_els, file_face);
 
 	printf("Grid init\n");
 
 	// инициализация сетки
-	//our_meth_LOS.transf_grid(file_cords, file_els, file_face);
-	//trans_face(file_cords+"tr",  file_face+"tr");
+	our_meth_LOS.transf_grid(file_cords, file_els, file_face);
+	trans_face(file_cords + "tr",  file_face + "tr");
+
+	double time_LU;
+	double time_LOS;
+	double time_GMRES;
+
 
 	printf("LOS\n");
 
 	//Запуск LOS
-	our_meth_LOS.init(file_cords+"tr", file_els+"tr", file_face+"tr1");
+	// засекаем время
+	time_LOS = clock();
+
+
+	our_meth_LOS.init(file_cords + "tr", file_els + "tr", file_face + "tr");
 	our_meth_LOS.set_sol(us1, uc1);
 	our_meth_LOS.set_coefs(lambda1, sigma1, epsilon1);
 	our_meth_LOS.set_w(w1);
@@ -91,6 +107,8 @@ int main(){
 
 	our_meth_LOS.form_matrix();
 	our_meth_LOS.solve();
+	// отсекаем время
+	time_LOS = clock() - time_LOS;
 
 	our_meth_LOS.out_rez("sol_LOS.txt");
 	our_meth_LOS.out_diff("diff_LOS.txt");
@@ -98,7 +116,10 @@ int main(){
 	printf("LU\n");
 
 	//Запуск LU
-	our_meth_LU.init(file_cords+"tr", file_els+"tr", file_face+"tr1");
+	// засекаем время
+	time_LU = clock();
+
+	our_meth_LU.init(file_cords + "tr", file_els + "tr", file_face + "tr");
 	our_meth_LU.set_sol(us1, uc1);
 	our_meth_LU.set_coefs(lambda1, sigma1, epsilon1);
 	our_meth_LU.set_w(w1);
@@ -106,27 +127,37 @@ int main(){
 
 	our_meth_LU.form_matrix();
 	our_meth_LU.solve();
+	// отсекаем время
+	time_LU = clock() - time_LU;
 
 	our_meth_LU.out_rez("sol_LU.txt");
 	our_meth_LU.out_diff("diff_LU.txt");
+	
+	
+	//Запуск GMRES
+	// засекаем время
+	time_GMRES = clock();
 
-	/*printf("BCGStab\n");
+	our_meth_GMRES.init(file_cords + "tr", file_els + "tr", file_face + "tr");
+	our_meth_GMRES.set_sol(us1, uc1);
+	our_meth_GMRES.set_coefs(lambda1, sigma1, epsilon1);
+	our_meth_GMRES.set_w(w1);
+	our_meth_GMRES.set_rp(fs1, fc1);
 
-	//Запуск BCGStab
-	our_meth_BCGS.init(file_cords+"tr", file_els+"tr", file_face+"tr1");
-	our_meth_BCGS.set_sol(us1, uc1);
-	our_meth_BCGS.set_coefs(lambda1, sigma1, epsilon1);
-	our_meth_BCGS.set_w(w1);
-	our_meth_BCGS.set_rp(fs1, fc1);
+	our_meth_GMRES.form_matrix();
+	our_meth_GMRES.solve();
+	
+	// Отсекаем время
+	time_GMRES = clock() - time_GMRES;
 
-	our_meth_BCGS.form_matrix();
-	our_meth_BCGS.solve();
-
-	our_meth_BCGS.out_rez("sol_BCGStab.txt");
-	our_meth_BCGS.out_diff("diff_BCGStab.txt");*/
+	our_meth_GMRES.out_rez("sol_GMRES.txt");
+	our_meth_GMRES.out_diff("diff_GMRES.txt");
 
 
-
+	std::cout << "Time LOS: " << time_LOS / (double)CLOCKS_PER_SEC << endl ;
+	std::cout << "Time LU: " << time_LU / (double)CLOCKS_PER_SEC << endl;
+	std::cout << "Time GMRES: " << time_GMRES / (double)CLOCKS_PER_SEC << endl;
+	system("pause");
 	return 0;
 }
 
@@ -177,5 +208,4 @@ for(set<int>::iterator it = face_node.begin(); it != face_node.end(); it++){
 
 	face_node.clear();
 	delete[] nodes;
-		
 }

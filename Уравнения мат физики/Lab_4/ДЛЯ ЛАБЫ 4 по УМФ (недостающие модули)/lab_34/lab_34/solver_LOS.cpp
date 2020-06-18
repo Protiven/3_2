@@ -7,19 +7,23 @@ void LOS::init(int *s_ig, int *s_jg, double *s_gu, double *s_gl, double *s_di, i
 	gl = s_gl;
 	di = s_di;
 	n = s_n;
-
+	this->memory = 0;
+	memory += sizeof(double) * n * 4 + sizeof(int) * (n + 1) * 2;
 	precond();
 }
 
 void LOS::set_rp(double *s_rp){
 	rp = s_rp;
 }
+
 void LOS::precond(){
 
 	double sum_l, sum_u, sum_d; //Промежуточные переменные, для вычисления сумм
 
 	
 	int copy_end = ig[n];
+
+	memory += (2 * copy_end + n) * sizeof(double);
 
 	Ll = new double [copy_end];
 	Uu = new double [copy_end];
@@ -90,7 +94,7 @@ void LOS::solve_L(double *f, double *&x){
 }
 
 void LOS::solve_U(double *f, double *&x){
-
+	memory += sizeof(double) * n;
 	double* f1 = new double [n];
 	for(int i = 0; i < n; i++)
 		f1[i] = f[i];
@@ -128,6 +132,8 @@ void LOS::solve(double *&solution, int &its){
 	double* p = new double [n];
 	double* s = new double [n]; //Вспомогательный вектор
 	double* t = new double [n]; //Вспомогательный вектор
+
+	memory += n * 6 * sizeof(double);
 
 	//r0 = L^(-1) * (f - Ax0)
 	mull_A(x0, s);

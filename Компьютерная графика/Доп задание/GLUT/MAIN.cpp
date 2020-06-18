@@ -146,6 +146,7 @@ int read_texture() {
 		GLuint tex;
 		glEnable(GL_TEXTURE_2D);				//Разрешение отображения текстур
 		glGenTextures(1, &tex);					//Генерация массива номеров текстур
+
 		glBindTexture(GL_TEXTURE_2D, tex);	//Выбор текущей текстуры по номеру
 		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, Pixels);	//Задание режима выравнивания
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);	//Задание режима учета параметров материала
