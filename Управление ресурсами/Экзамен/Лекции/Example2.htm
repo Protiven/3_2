@@ -1,0 +1,564 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="Example2.files/filelist.xml">
+<title>/*</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>vms</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>vms</o:LastAuthor>
+  <o:Revision>1</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2009-04-21T08:51:00Z</o:Created>
+  <o:LastSaved>2009-04-21T08:52:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>498</o:Words>
+  <o:Characters>2841</o:Characters>
+  <o:Company>NSTU</o:Company>
+  <o:Lines>23</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3333</o:CharactersWithSpaces>
+  <o:Version>11.6568</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Обычная таблица";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+</head>
+
+<body lang=RU style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal>/*<span style='mso-tab-count:1'>         </span>пример
+взаимодействия клиента и сервера через <span class=SpellE>сокеты</span> <span
+class=GramE>в</span> <o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+class=GramE>режиме</span> TCP-соединения.<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Параметров
+нет.<o:p></o:p></p>
+
+<p class=MsoNormal>*/<o:p></o:p></p>
+
+<p class=MsoNormal>/*<span style='mso-tab-count:1'>         </span>***************************************************<span
+style='mso-spacerun:yes'>       </span>*/<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:3'>                                   </span>/*
+Серверный процесс */<o:p></o:p></p>
+
+<p class=MsoNormal>#<span class=SpellE>include</span> &lt;<span class=SpellE>signal.h</span>&gt;<o:p></o:p></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;ctype.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;stdio.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/types.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/socket.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;netinet/in.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;arpa/inet.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;tcpd.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/fcntl.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;unistd.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#define
+SIZE sizeof(struct sockaddr_in)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>void
+catcher (int sig);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>int
+newsockfd;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>main ()<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>int sockfd;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>char c;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>struct sockaddr_in server = {0, AF_INET,
+7000, INADDR_ANY};<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>static struct sigaction act;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>struct sockaddr_in client;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>int client_len =SIZE; <o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>/*<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>act.sa_handler = catcher;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>sigfillset (&amp;(act.sa_mask));<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>sigaction (SIGPIPE, &amp;act, NULL);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>extern unsigned catcher()<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>*/<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>signal (SIGPIPE, catcher); <o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>/* </span>Установить<span style='mso-ansi-language:
+EN-US'> </span>абонентскую<span style='mso-ansi-language:EN-US'> </span>точку<span
+style='mso-ansi-language:EN-US'> </span><span class=SpellE>сокета</span><span
+lang=EN-US style='mso-ansi-language:EN-US'> */<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>if ((sockfd = socket (AF_INET, SOCK_STREAM,
+0)) == -1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>perror (&quot;Error of socket&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>exit (1);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>   </span><span style='mso-spacerun:yes'> </span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span>/* Связать адрес с
+абонентской точкой */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span lang=EN-US
+style='mso-ansi-language:EN-US'>if (bind (sockfd, (struct sockaddr *)
+&amp;server, SIZE) == -1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>perror (&quot;Error of bind&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>exit (1);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span>/* Включить прием
+соединений */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span class=SpellE>if</span>
+(<span class=SpellE>listen</span> (<span class=SpellE>sockfd</span>, 5) == -1)<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span lang=EN-US
+style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>perror (&quot;Error of listen&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>exit (1);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span class=SpellE>for</span>
+(;;)<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>    </span>{<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>      </span>/* Прием запроса
+на соединение */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>           </span><span
+lang=EN-US style='mso-ansi-language:EN-US'>if ((newsockfd = accept (sockfd,
+(struct sockaddr *) &amp;client, &amp;client_len)) == -1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'> 
+</span>perror (&quot;Error of accept&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'> 
+</span>continue;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>/* </span>Принят<span style='mso-ansi-language:
+EN-US'> </span>запрос<span style='mso-ansi-language:EN-US'> </span>на<span
+style='mso-ansi-language:EN-US'> </span>соединение<span lang=EN-US
+style='mso-ansi-language:EN-US'> */<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>printf (&quot;request from IP:
+%s\n&quot;, inet_ntoa(client.sin_addr));<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span></span>/* Создать дочерний процесс для
+работы с этим соединением */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>      </span><span
+lang=EN-US style='mso-ansi-language:EN-US'>if (fork () == 0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'> 
+</span>while (recv (newsockfd, &amp;c, 1, 0) &gt; 0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'>   
+</span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'>     
+</span>c = toupper (c);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'>     
+</span>send (newsockfd, &amp;c, 1, 0);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'>   
+</span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>  </span>/* После того, как клиент прекратит передачу
+данных,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>   </span>* <span class=SpellE>сокет</span> может быть
+закрыт и дочерний процесс<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>   </span>* завершает работу */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>  </span><span class=SpellE>close</span> (<span
+class=SpellE>newsockfd</span>);<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>  </span><span class=SpellE>exit</span> (0);<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>      </span>/* В
+родительском процессе <span class=SpellE>newsockfd</span> не <span class=GramE>нужен</span>
+*/<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>      </span><span
+lang=EN-US style='mso-ansi-language:EN-US'>close (newsockfd);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>void <o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>catcher
+(int sig)<o:p></o:p></span></p>
+
+<p class=MsoNormal>{<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span class=SpellE>close</span>
+(<span class=SpellE>newsockfd</span>);<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span class=SpellE>exit</span>
+(0);<o:p></o:p></p>
+
+<p class=MsoNormal>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/*<span style='mso-tab-count:1'>         </span>***************************************************<span
+style='mso-spacerun:yes'>       </span>*/<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:3'>                                   </span>/*
+Клиентский процесс */<o:p></o:p></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;ctype.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;stdio.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/types.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/socket.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;netinet/in.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;arpa/inet.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;tcpd.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;sys/fcntl.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#include
+&lt;unistd.h&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>#define
+SIZE sizeof(struct sockaddr_in)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>main ()<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>int sockfd;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>char c, rc;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE>int</span> <span class=SpellE>i</span>;<o:p></o:p></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>char
+mas[5]=&quot;asdfg&quot;;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>struct sockaddr_in server = {0, AF_INET,
+7000};<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span></span>/* Преобразовать и сохранить IP <span
+class=SpellE>address</span> сервера */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span lang=EN-US
+style='mso-ansi-language:EN-US'>server.sin_addr.s_addr = inet_addr
+(&quot;193.125.2.130&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>/* </span>Установить<span style='mso-ansi-language:
+EN-US'> </span>абонентскую<span style='mso-ansi-language:EN-US'> </span>точку<span
+style='mso-ansi-language:EN-US'> </span><span class=SpellE>сокета</span><span
+lang=EN-US style='mso-ansi-language:EN-US'> */<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>  </span>if ((sockfd = socket (AF_INET, SOCK_STREAM,
+0)) == -1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>perror (&quot;Error of socket&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>exit (1);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span>/* Подключить <span
+class=SpellE>сокет</span> к адресу сервера */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span lang=EN-US
+style='mso-ansi-language:EN-US'>if (connect (sockfd, (struct sockaddr *)
+&amp;server, SIZE) == -1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>perror (&quot;Error of connect&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>exit (1);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>    </span></span>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span>/* Обмен данными с
+сервером */<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>  </span><span class=SpellE>for</span>
+(<span class=SpellE>rc</span> = '\<span class=SpellE>n</span>';;)<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>    </span><span lang=EN-US
+style='mso-ansi-language:EN-US'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>if (rc == '\n')<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>printf (&quot;Input lower case
+letter\n&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>        </span>c = getchar ();<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>send (sockfd, &amp;c, 1, 0);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>if (recv (sockfd, &amp;rc, 1, 0) &gt; 0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>printf (&quot;%c&quot;, rc);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>      </span>else<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'> 
+</span>printf (&quot;Server don't answer\n&quot;);<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><span
+style='mso-tab-count:1'>            </span><span style='mso-spacerun:yes'> 
+</span></span><span class=SpellE>close</span> (<span class=SpellE>sockfd</span>);<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span><span
+style='mso-spacerun:yes'>  </span><span class=SpellE>exit</span> (1);<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>}<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'>    </span>}<o:p></o:p></p>
+
+<p class=MsoNormal>}<o:p></o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+</div>
+
+</body>
+
+</html>
